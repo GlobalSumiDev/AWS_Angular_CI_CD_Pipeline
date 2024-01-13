@@ -1,0 +1,162 @@
+body{
+    font-family: $ff-base;
+    font-size: $fs-base;
+    background: $body-color;
+    color: $body-txt;
+    a{
+       text-decoration: none;
+    }
+    p{
+       font-size: $fs-base;
+       color: $body-txt;
+       line-height: $lh-base;   
+    }
+    img{
+     max-width: 100%;
+    }
+    h1{
+       font-size: $fs-h1;
+       font-weight: $semibold;
+       color: $primarycolor;
+    }
+    h2{
+       font-size: $fs-h2;
+       font-weight: $semibold;
+       color: $primarycolor; 
+       padding-bottom: 25px;
+       line-height: 40px;
+    }
+    h5{
+        font-size: $fs-h5;
+        font-weight: $medium;
+        color: $primarycolor; 
+        line-height: $lh-h5;
+
+    }
+    .sub-title{
+       color: $sub-title-txt;
+       font-size: $fs-milli;
+       font-weight: $medium;
+       padding-bottom: 25px;
+       text-transform: uppercase;
+    }
+    .large-cap{
+        padding: 150px 0;
+      }
+   input[type=number]::-webkit-inner-spin-button, 
+   input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0; 
+   }
+}
+
+// Arrow Styles
+.slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus{
+   background: #f7f7f7 !important;
+}
+.slick-slider{
+   .slick-dots{
+      li{
+         margin: 0;
+         width: 12px;
+         height: 12px;
+         padding-left: 25px;
+         button{
+            width: 12px;
+            height: 12px;
+            // border: 1px solid red;
+            &:before {
+               border: 1px solid #4f8ee6;
+               border-radius: 30px;
+               width: 12px;
+               height: 12px;
+               opacity: 1;
+           
+           }
+         }
+         &.slick-active {
+            button{
+               &:before {
+                  background: #4f8ee6;
+                  border-radius: 30px;
+                  width: 12px;
+                  height: 12px;
+              
+              }
+            }
+         }
+      }
+   }
+}
+
+.slick-slider{
+    button {
+      width: 40px;
+      height: 40px;
+      background: #f7f7f7;
+      border-radius: 10px;
+      &.slick-prev{
+        
+         &::before{
+            content: url('../images/slider-arrow-left.png');
+            line-height: inherit;
+         }
+      }
+      &.slick-next{
+         &::before{
+            content: url('../images/slider-arrow.png');
+            line-height: inherit;
+         }
+      }
+   }
+}
+.industries-item {
+   .slick-prev{
+      left: -55px;
+   }
+   .slick-next {
+      right: -55px;
+   }
+}
+@media only screen and (max-width: 992px) {
+   body  {
+      h1{
+         font-size: 45px;
+      }
+      h2{
+         font-size: 35px;
+      }
+      .large-cap{
+         padding: 120px 0;
+      }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+   .innerBanner {
+      height: 250px;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+   body  {
+      h1{
+         font-size: 36px;
+      }
+      h2 {
+         font-size: 26px;
+         line-height: 34px;
+         br{
+            display: none;
+         }
+     }
+     .sub-title{
+      padding-bottom: 15px;
+     }
+      .large-cap{
+         padding: 80px 0;
+      }
+  }
+}

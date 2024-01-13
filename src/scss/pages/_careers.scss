@@ -1,0 +1,250 @@
+.runText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .content {
+        max-width: 660px;
+        text-align: center;
+    }
+}
+
+.accordion {
+    h6 {
+        margin-top: 15px;
+        font-size: $fs-normal;
+        color: $clr-black;
+        font-weight: $semibold;
+    }
+
+    .accordion-item {
+        background: $aboutblogBg;
+        margin-bottom: 18px;
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .accordion-body {
+        padding: 28px 50px;
+        padding-top: 0px;
+        p{
+            font-weight: $medium;
+        }
+        .listStyle{
+            display: block;
+            li:not(:last-child){
+                margin-bottom: 14px;
+            }
+        }
+    }
+
+    .accordion-button {
+        background: $aboutblogBg;
+        padding: 28px 50px;
+        box-shadow:none;
+       
+
+        &::after{
+            background: url('../../assets/images/svg/arrow.svg');
+            position: absolute;
+            top:44%;
+            right: 22px;
+        }
+        
+
+        .titleDetails {
+            max-width: 200px;
+            width: 100%;
+
+            .tags {
+                padding: 5px 10px;
+                font-size: $fs-milli;
+                color: $clr-white;
+                background: $sub-title-txt;
+                border-radius: 10px;
+                text-transform: uppercase;
+                &.remote{
+                    background: $clr-hex;
+                }
+            }
+
+           
+        }
+
+        .description {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+
+            p {
+                text-align: center;
+                max-width: 355px;
+                font-size: $fs-base;
+                font-weight: $medium;
+            }
+        }
+
+        .actionBtn {
+            max-width: 175px;
+            width: 100%;
+
+            button {
+                padding: 18px 25px;
+                background: $btnbgcolor;
+                border: none;
+                font-size: $fs-base;
+                font-weight: $semibold;
+                color: $clr-white;
+                text-transform: capitalize;
+                border-radius: 8px;
+                transition: all .3s ease-in-out;
+                background-position: 25%;
+                background-size: 400%;
+                -webkit-transition: background 500ms ease-in-out, color 500ms ease-in-out;
+                transition: background 500ms ease-in-out, color 500ms ease-in-out;
+                background-image: linear-gradient(45deg, transparent 50%, #051129 50%);
+                .white-arrow{
+                    display: inline;
+                }
+                .green-arrow{
+                    display: none;
+                }
+                &:hover{
+                    background-position: 100%;
+                }
+            }
+        }
+        &.collapsed{
+            .actionBtn {
+                .btn-group {
+                    padding: 17px 24px;
+                    border: 1px solid $btnbgcolor;
+                    background: transparent;
+                    color: $btnbgcolor;
+                    transition: all .3s ease-in-out;
+                    background-position: 25%;
+                    background-size: 400%;
+                    -webkit-transition: background 500ms ease-in-out, color 500ms ease-in-out;
+                    transition: background 500ms ease-in-out, color 500ms ease-in-out;
+                    background-image: linear-gradient(45deg, transparent 50%, #051129 50%);
+                    button{
+                        background: transparent;
+                        padding: 0;
+                        color: $btnbgcolor;
+                      
+                    }
+                    .right-arrow {
+                        position: relative;
+                        left: 3px;
+                        transition: all 0.3s ease-in-out;
+                        .white-arrow{
+                            display: none;
+                        }
+                        .green-arrow{
+                            display: inline;
+                        }
+                    }
+                    &:hover{
+                        background-position: 100%;
+                        border: 1px solid #051129;
+                        color: $clr-white;
+                        .right-arrow {
+                            left: 9px;
+                                transition: all .3s ease-in-out;
+                            }
+                            // button{
+                            //     color: $clr-white;
+                            // }
+                            // .right-arrow {
+                            //     .white-arrow{
+                            //         display: inline;
+                            //     }
+                            //     .green-arrow{
+                            //         display: none;
+                            //     }
+                            // }
+                    }
+                   
+                }
+            }
+        }
+    }
+}
+
+
+// Application
+.submit-form{
+    padding-top: 50px;
+    .contact-form{
+        width: 100%;
+        padding: 0;
+        box-shadow: none;
+        form{
+            width: 100%;
+        }
+        .form-item input{
+            height: 48px;
+        }
+    }
+ 
+    input[type=file]{
+        border: 1px dashed #dee2e6;
+        color: transparent;
+        position: absolute;
+    }
+    
+   input[type=file]::file-selector-button{
+       display: none;
+    }
+    
+    input[type=file]::before{
+        content:"";
+        position: absolute;
+        top: 0px;
+        right: 10px;    
+        width: 100%;
+        height: 100%;
+        background: url('../../assets/images/upload.png') no-repeat right;
+    }
+    .form-item label{
+        top: 18px;
+    }
+}
+.file-input{
+    height: 50px;
+    #fileNameContainer, #uploadCVContainer {
+        position: absolute;
+        top: 16px;
+        left: 20px;
+        color: #000;
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .accordion {
+        .accordion-button {
+            flex-direction: column;
+            padding: 28px;
+
+            .titleDetails {
+                max-width: 100%;
+                margin-bottom: 18px;
+            }
+
+            .description {
+                margin-bottom: 20px;
+                p {
+                    max-width: 100%;
+                    text-align: left;
+                }
+            } 
+        }
+        .accordion-body{
+            padding: 28px;
+        }
+    }
+    .mob-align{
+        margin-bottom: 30px;
+    }
+}

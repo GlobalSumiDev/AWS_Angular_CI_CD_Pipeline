@@ -1,0 +1,29 @@
+
+//Flex
+@mixin flex-center ($align) {
+    display: flex;
+    align-items: $align;
+}
+
+@mixin flex-between {
+    @include flex-center;
+    justify-content: space-between;
+}
+@mixin justify-center{
+    @include flex-center;
+    justify-content: center;
+}
+@mixin flex-center-column {
+    @include flex-center;
+    flex-direction: column;
+}
+
+//Size
+@mixin box-size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin border-radius($pixel) {
+    border-radius: $pixel;
+}
