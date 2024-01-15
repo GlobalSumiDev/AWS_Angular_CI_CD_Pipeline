@@ -1,8 +1,7 @@
 .footer-bg{
     position: relative;
-    background-image: url('../../assets/images/footer-bg.jpg') no-repeat bottom;
+    background: url('../../assets/images/footer-bg.jpg') no-repeat bottom;
     background-size: cover;
-    background-color: #1e7145;
     &.footer-home{
         background: transparent;
     }
