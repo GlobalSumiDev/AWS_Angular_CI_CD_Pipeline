@@ -16,11 +16,12 @@ import { HomeComponent } from './home/home.component';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { IotAndDigitalExperienceComponent } from './iot-and-digital-experience/iot-and-digital-experience.component';
 import { ManufacturingComponent } from './manufacturing/manufacturing.component';
-import { MediaHospitalityComponent } from './media-hospitality/media-hospitality.component';
+import { MobilityHospitalityComponent } from './mobility-hospitality/mobility-hospitality.component';
 import { ProductComponent } from './product/product.component';
 import { RetailComponent } from './retail/retail.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MediacommunicationComponent } from './mediacommunication/mediacommunication.component';
 
 @Component({
   selector: 'app-root',
@@ -43,7 +44,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   InsuranceComponent,
   IotAndDigitalExperienceComponent,
   ManufacturingComponent,
-  MediaHospitalityComponent,
+  MobilityHospitalityComponent,
+  MediacommunicationComponent,
   ProductComponent,
   RetailComponent,
   SidemenuComponent,

@@ -15,10 +15,11 @@ import { HealthcareComponent } from './healthcare/healthcare.component';
 import { InsuranceComponent } from './insurance/insurance.component';
 import { IotAndDigitalExperienceComponent } from './iot-and-digital-experience/iot-and-digital-experience.component';
 import { ManufacturingComponent } from './manufacturing/manufacturing.component';
-import { MediaHospitalityComponent } from './media-hospitality/media-hospitality.component';
+import { MobilityHospitalityComponent } from './mobility-hospitality/mobility-hospitality.component';
 import { ProductComponent } from './product/product.component';
 import { RetailComponent } from './retail/retail.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
+import { MediacommunicationComponent } from './mediacommunication/mediacommunication.component';
 
 export const routes: Routes = [
     { path:'home', component: HomeComponent },
@@ -37,7 +38,8 @@ export const routes: Routes = [
     { path: 'insurance', component: InsuranceComponent },
     { path: 'iotdigitalexperience', component: IotAndDigitalExperienceComponent },
     { path: 'manufacturing', component: ManufacturingComponent },
-    { path: 'mediahospitality', component: MediaHospitalityComponent },
+    { path: 'mobilityhospitality', component: MobilityHospitalityComponent },
+    { path: 'mediacommunication', component: MediacommunicationComponent },
     { path: 'product', component: ProductComponent },
     { path: 'retail', component: RetailComponent },
     { path: 'sidemenu', component: SidemenuComponent },
