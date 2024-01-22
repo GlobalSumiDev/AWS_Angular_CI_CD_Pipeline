@@ -147,10 +147,14 @@
         left: 35px;
         z-index: 1;
     }
+    li{
+    list-style: none;
+    }
 }
 .services-item{
     position: relative;
     overflow: hidden;
+    width: 300px;
     @include border-radius(10px);
     margin: 0 10px;
     .card-overlay{
@@ -405,6 +409,7 @@
         li{
             max-width: 550px;
             padding-left: 30px;
+            list-style: none;
         }
       }
     .auth-info{
