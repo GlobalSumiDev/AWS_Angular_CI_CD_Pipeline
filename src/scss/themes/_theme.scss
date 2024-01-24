@@ -100,13 +100,13 @@ body{
       &.slick-prev{
         
          &::before{
-            content: url('../images/slider-arrow-left.png');
+            content: url('./../../assets/images/slider-arrow-left.png');
             line-height: inherit;
          }
       }
       &.slick-next{
          &::before{
-            content: url('../images/slider-arrow.png');
+            content: url('./../../assets/images/slider-arrow.png');
             line-height: inherit;
          }
       }

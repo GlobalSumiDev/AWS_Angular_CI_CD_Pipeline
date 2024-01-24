@@ -20,6 +20,7 @@ import { ProductComponent } from './product/product.component';
 import { RetailComponent } from './retail/retail.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { MediacommunicationComponent } from './mediacommunication/mediacommunication.component';
+import { CareerApplicationComponent } from './career-application/career-application.component';
 
 export const routes: Routes = [
     { path:'home', component: HomeComponent },
@@ -43,6 +44,7 @@ export const routes: Routes = [
     { path: 'product', component: ProductComponent },
     { path: 'retail', component: RetailComponent },
     { path: 'sidemenu', component: SidemenuComponent },
+    { path: 'career-application', component: CareerApplicationComponent },
     { path: '**', redirectTo: 'home' }
 ];
 @NgModule({
