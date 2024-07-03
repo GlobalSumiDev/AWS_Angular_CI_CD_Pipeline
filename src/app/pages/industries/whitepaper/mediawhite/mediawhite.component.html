@@ -1,0 +1,52 @@
+<app-innerbanner [subTitle]="'Media And Communication'"
+  [heading]="'Creating captivating multimedia experiences to foster enhanced connectivity and engagement tailored to your needs'"
+  btnText="let's talk" [backgroundUrl]="'media-and-communications.png'"></app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}" id="start">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-up">
+          <img class="blogImg blog-banner" src="./assets/images/industries/whitepaper-banner/media.png"
+            alt="banking-financials" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <!-- <h2>Revolutionizing Transportation: The Future of Mobility as a Service</h2> -->
+          <p>Information Technology (IT) has become the cornerstone of transformation in the media industry,
+            revolutionizing how information is created, distributed, and consumed. The shift from traditional print and
+            broadcast media to digital platforms has been made possible by IT innovations. Content creation has become
+            more agile and efficient, allowing creators to produce diverse multimedia content that can reach global
+            audiences through digital distribution channels.
+          </p>
+          <p>Streaming services have redefined the way media content is accessed, providing on-demand entertainment
+            across various devices. Moreover, social media platforms, facilitated by IT, have transformed audience
+            engagement, enabling real-time interactions, user-generated content, and influencing media discussions.
+          </p>
+          <p>The integration of data analytics in media has brought about personalized experiences, where content
+            recommendations and targeted advertising are tailored to individual preferences. Additionally, technologies
+            like Virtual Reality (VR) and Augmented Reality (AR) have introduced immersive storytelling and interactive
+            content, adding new dimensions to how audiences experience media.</p>
+          <p>Journalism and reporting have also benefited from IT, with tools aiding journalists in research,
+            fact-checking, and data visualization, leading to more informed and real-time news updates.
+            Mobile technology and cross-platform accessibility have ensured that media content remains readily available
+            and accessible across devices, transforming how audiences consume information.
+
+          </p>
+          <p>Overall, IT's impact on the media industry has democratized content creation, amplified distribution,
+            enhanced user engagement, and fostered innovative storytelling, adapting to the evolving preferences and
+            behaviors of today's media consumers.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+<!-- <div class="innerBanner bank product"
+  style="background-image: url('./assets/images/banner-images/energy-and-utilities.png');">
+  <h1 data-aos="fade-up"></h1>
+</div> -->
+<app-innerbanner [subTitle]="'Searchblox'" [heading]="'Searchblox'" btnText="let's talk"
+  [backgroundUrl]="'searchblox.png'">
+</app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-left">
+          <img class="blogImg blog-banner" src="./assets/images/products/Searchblox.png" alt="about-img" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <h2>SearchAI chatBot implementation with Searchblox
+          </h2>
+          <p>To facilitate insightful conversations with your Generative AI data, we partner with SearchBlox to leverage
+            the power of AI in revolutionizing information retrieval. Our collaboration aims to unify user experiences
+            across various platforms, guiding users towards products and services seamlessly through the implementation
+            of SearchAI.</p>
+
+          <ul class="listStyle mt-3">
+            <li>Chatbot</li>
+            <li>SmartFAQsTM </li>
+            <li>Smartsuggest</li>
+            <li>Semanticlens</li>
+            <li>Smartsynonyms</li>
+            <li>PretextTMNLP</li>
+
+          </ul>
+          <div class="mt-3">
+            <div class="btn-group">
+              <a href="{{sourcePath}}" target="_blank">Read more
+                <span class="right-arrow">
+                  <img src="./assets/images/button-arrow.png" alt="button-arrow" /> </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

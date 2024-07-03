@@ -1,0 +1,41 @@
+
+
+.sliverBg{
+    background: $sliverBg;
+}
+
+.listStyle{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    li{
+        padding-left: 28px;
+        position: relative;
+        font-size: $fs-base;
+        font-weight: $medium;
+        &::after{
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: $sub-title-txt;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .img-spacing{
+        padding-top: 40px;
+    }
+}
+
+
+@media only screen and (max-width: 480px) {
+    .listStyle{
+        grid-template-columns: 1fr;
+    }
+}
+

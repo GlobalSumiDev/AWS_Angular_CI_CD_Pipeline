@@ -1,0 +1,67 @@
+<app-innerbanner [subTitle]="'Cloud Services'"
+  [heading]="'Customize your cloud strategy that aligns your unique needs enabling your business to thrive in the digital age.'"
+  btnText="let's talk" [backgroundUrl]="'cloud-service.png'"></app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-up">
+          <img class="blogImg blog-banner" src="./assets/images/services/cloud-service.png" alt="Cloud Service" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <h2>Innovation and tranformation in cloud migration</h2>
+          <p>As the annual migration value is expected to reach trillions of dollars, businesses face the critical task
+            of selecting the right cloud platform. Successful migration hinges on integrating cloud expertise and best
+            practices to ensure a seamless transition. With a myriad of options available, factors such as security
+            compliance, multi-cloud management, licensing, resource constraints, and cloud spending must be carefully
+            considered. The key to enhancing migration efficiency lies in identifying the optimal blend of cloud
+            strategies.
+          </p>
+          <ul class="listStyle mt-3">
+            <li>Multi-cloud or hybrid</li>
+            <li>Edge computing</li>
+            <li>Cloud orchestration and optimization</li>
+            <li>Increased SASE adoption</li>
+            <li>Serverless computing</li>
+            <li>Security and privacy</li>
+            <li>Graph technologies</li>
+            <li>Public and private cloud</li>
+          </ul>
+        </div>
+        <div class="content" data-aos="fade-up">
+          <h2>Strategic cloud decision-making</h2>
+          <p>Elevate your business to new heights with our comprehensive cloud computing solutions. As a trusted
+            partner, we specialize in guiding companies through the complexities of cloud adoption. From selecting the
+            ideal cloud platform to ensuring seamless migration, we leverage expertise and best practices. Our focus on
+            security compliance, effective multi-cloud management, and strategic cost optimization sets us apart. Let us
+            customize a cloud strategy that aligns with your unique needs, empowering your business for success in the
+            digital era.
+
+          </p>
+          <div>
+            <div class="logos">
+              <ul class="p-0 services-logo">
+                <ngx-slick-carousel #slickModal="slick-carousel" [config]="autoLoopingLogo" class="">
+                <li ngxSlickItem> <img src="./assets/images/services/logo/aws-services.png" /></li>
+                <li> <img src="./assets/images/services/logo/azure.png" /></li>
+                <li> <img src="./assets/images/services/logo/gcp.png" /></li>
+                <li><img src="./assets/images/services/logo/oracle.png" /></li>
+                <li><img src="./assets/images/services/logo/ibm.png" /></li>
+                </ngx-slick-carousel>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

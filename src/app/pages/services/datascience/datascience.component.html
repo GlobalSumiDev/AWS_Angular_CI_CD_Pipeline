@@ -1,0 +1,74 @@
+<app-innerbanner [subTitle]="'Data Science'"
+  [heading]="'Utilizing advanced analytics, machine learning, and statistical modeling techniques to uncover valuable insights from your data.'"
+  btnText="let's talk" [backgroundUrl]="'data-science.png'"></app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-up">
+          <img class="blogImg blog-banner" src="./assets/images/services/data-science.png" alt="data-science" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <h2>Today's data alchemy: The science of insights</h2>
+          <p>To enhance customer service efficiency, mining data, predictive analysis, and data visualization are
+            essential for any data enterprise aiming to understand customer behavior. Attaining meaningful future
+            insights for your business requires the establishment of a robust data science platform. Success in data
+            science hinges on navigating multiple data science products and determining the optimal implementation for
+            achieving data visualizations. This process creates insights for analysts and business users, translating
+            tangible business benefits for the future.
+          </p>
+          <ul class="listStyle mt-3">
+            <li>Data rangling</li>
+            <li>Data mining </li>
+            <li>Data cleansing </li>
+            <li>Feature engineering </li>
+            <li>Data modelling </li>
+            <li>Predictive modelling</li>
+            <li>Data visualization</li>
+            <li>Data deployment </li>
+
+          </ul>
+        </div>
+        <div class="content" data-aos="fade-up">
+          <h2>Empowering the future with Datascience</h2>
+          <p>Unlock the power of data with our specialized Data Science services. We excel in transforming raw data into
+            actionable insights. Our dedicated team of data scientists leverage advanced analytics, machine learning,
+            and statistical modeling to extract meaningful patterns from your data. Whether you're seeking predictive
+            analytics, optimization solutions, or data-driven decision support, we tailor our services to meet your
+            specific needs. Trust us to guide you through the entire data science lifecycle, from data exploration and
+            preparation to model development and deployment. Choose us for a data-driven future where your information
+            becomes a strategic asset for business growth and success.
+
+          </p>
+          <div>
+            <div class="logos">
+              <ul class="p-0 services-logo">
+               <ngx-slick-carousel #slickModal="slick-carousel" [config]="autoLoopingLogo" class="">
+
+                  <li ngxSlickItem><img src="./assets/images/services/logo/python.png" /></li>
+                  <li><img src="./assets/images/services/logo/r-language.png" /></li>
+                  <li><img src="./assets/images/services/logo/tensor-flow.png" /></li>
+                  <li><img src="./assets/images/services/logo/big-ml.png" /></li>
+                  <li><img src="./assets/images/services/logo/sas.png" /></li>
+                  <li><img src="./assets/images/services/logo/apache-spark.png" /></li>
+                  <li><img src="./assets/images/services/logo/hadoop.png" /></li>
+                  <li><img src="./assets/images/services/logo/scala.png" /></li>
+                </ngx-slick-carousel>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,124 @@
+<app-innerbanner [subTitle]="'Contact Us'"
+  [heading]="' Have inquiries? Require assistance? We\'re available to support you!'" btnText="let's connect"
+  [backgroundUrl]="'contact-us.png'">
+</app-innerbanner>
+<!-- Address-Section -->
+<section class="large-cap pb-0" data-aos="fade-up">
+  <div class="address">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="address-info pt-0">
+           <div>
+            <div class="location">
+              <img src="./assets/images/location.png" alt="img">
+            </div>
+           </div>
+            <div class="content-right">
+              <h5>Location</h5>
+              <h6>11549 Nuckols Road Ste B<br/>
+                Glen Allen<br/>
+                VA 23059
+              </h6>
+            </div>
+          </div>
+          <div class="address-info">
+            <div>
+              <img src="./assets/images/support.png" alt="img">
+            </div>
+            <div class="content-right">
+              <h5>Support</h5>
+              <h6>Mobile: <a href="tel:201-993-3194">201-993-3194</a><br>
+                Support: <a href="mailto:info@globalsumi.com">{{'info@globalsumi.com'}}</a>
+              </h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-7">
+
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3157.3360670320735!2d-77.5952164!3d37.688305799999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b141c13ecd5857%3A0x8d5d573e50880aef!2sGlobal%20Sumi%20Technologieis%20Inc!5e0!3m2!1sen!2sin!4v1710861231171!5m2!1sen!2sin"
+           width="600" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="letstalk"></div>
+<!-- form section -->
+<!-- <section class="large-cap form-area">
+  <div class="container">
+    <div class="row col-change">
+      <div class="col-md-6" data-aos="fade-right">
+        <div class="content-left">
+          <h2>Ready to get started?</h2>
+          <p>Kindly fill out the form provided, and we will be in touch with you shortly.
+          </p>
+          <div class="contact-form contact-page">
+            <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+              <div class="home-form">
+                <div class="form-grp">
+                  <div class="form-item" [ngClass]="{ 'is-invalid': submitted && contForm.fullName.errors }">
+                    <input type="text" id="yuorname" formControlName="fullName" autocomplete="off" required />
+                    <label for="yuorname">Your Name*</label>
+                    <div *ngIf="submitted && contForm.fullName.errors" class="invalid-feedback">
+                      <div *ngIf="contForm.fullName.errors.required">Name is required</div>
+                    </div>
+                  </div>
+                  <div class="form-item" [ngClass]="{ 'is-invalid': submitted && contForm.phoneNumber.errors }">
+                    <input type="number" id="phonenumber" formControlName="phoneNumber" autocomplete="off" required />
+                    <label for="phonenumber">Phone Number*</label>
+                    <div *ngIf="submitted && contForm.phoneNumber.errors" class="invalid-feedback">
+                      <div *ngIf="contForm.phoneNumber.errors.required">Phone number is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-grp">
+                  <div class="form-item" [ngClass]="{ 'is-invalid': submitted && contForm.email.errors }">
+                    <input type="email" id="email" formControlName="email" autocomplete="off" required />
+                    <label for="email">Email*</label>
+
+                    <div *ngIf="submitted && contForm.email.errors" class="invalid-feedback">
+                      <div *ngIf="contForm.email.errors.required">Email is required</div>
+                      <div *ngIf="contForm.email.errors.email">Enter a valid email</div>
+                    </div>
+
+                  </div>
+                  <div class="form-item" [ngClass]="{ 'is-invalid': submitted && contForm.subject.errors }">
+                    <input type="text" id="subject" formControlName="subject" autocomplete="off" required />
+                    <label for="subject">Subject*</label>
+                    <div *ngIf="submitted && contForm.subject.errors" class="invalid-feedback">
+                      <div *ngIf="contForm.subject.errors.required">Subject is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="form-item" [ngClass]="{ 'is-invalid': submitted && contForm.message.errors }">
+                    <textarea id="message" formControlName="message" autocomplete="off" required></textarea>
+                    <label for="message">Message*</label>
+                    <div *ngIf="submitted && contForm.message.errors" class="invalid-feedback">
+                      <div *ngIf="contForm.message.errors.required">Message is required</div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="btn-group mt-0">
+                    <button type="submit">
+                      <span>Submit
+                        <span class="right-arrow">
+                          <img src="./assets/images/button-arrow.png" alt="button-arrow" />
+                        </span>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section> -->

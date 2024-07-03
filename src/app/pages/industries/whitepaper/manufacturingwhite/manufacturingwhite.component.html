@@ -1,0 +1,56 @@
+<app-innerbanner [subTitle]="'Manufacturing'"
+  [heading]="'Our dedication to Industrial IT streamlining operations offers a pathway to achieve manufacturing excellence in the future.'"
+  btnText="let's talk" [backgroundUrl]="'manufacturing.png'"></app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}" id="start">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-up">
+          <img class="blogImg blog-banner" src="./assets/images/industries/whitepaper-banner/manufacturing.png"
+            alt="banking-financials" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <h2>Manufacturing adoption of Industry 4.0 technologies</h2>
+          <p>Information Technology (IT) has brought significant advancements and transformative changes to the world of
+            manufacturing, revolutionizing traditional practices, and enhancing operational efficiency. IT advancements
+            have facilitated the integration of automation and robotics into manufacturing processes. Robots equipped
+            with AI and machine learning capabilities perform tasks with precision, speed, and consistency, reducing
+            human error and enhancing productivity. This has enabled the collection, analysis, and interpretation of
+            vast amounts of data through IoT sensors, connected devices, and data analytics. Manufacturers use this data
+            for predictive maintenance, process optimization, and informed decision-making.
+          </p>
+          <p>Another new industrial buzz around the advent of Smart Manufacturing, enabled by IT, integrates various
+            technologies like IoT, AI, cloud computing, and analytics to create interconnected and data-driven
+            production environments. It optimizes supply chains, enables predictive maintenance, and enhances overall
+            efficiency. IT has empowered manufacturers to meet the growing demand for customized products by enabling
+            flexible and agile production processes. Advanced software and systems allow for quick reconfiguration of
+            manufacturing lines, catering to diverse customer needs.
+          </p>
+          <p>With the supply chain optimization, IT tools and platforms provide real-time visibility and analytics. This
+            enhances inventory management, reduces delays, and facilitates better coordination among suppliers,
+            distributors, and manufacturers. IT-based systems monitor and ensure product quality throughout the
+            manufacturing process. Automated inspection systems use sensors and cameras to detect defects, reducing
+            waste and enhancing quality control.</p>
+          <p>IT has also facilitated remote monitoring and collaboration, allowing experts to oversee operations from
+            anywhere globally. Remote diagnostics and troubleshooting help in resolving issues swiftly, reducing
+            downtime. IT advancements have also revolutionized manufacturing processes through 3D printing and additive
+            manufacturing technologies, enabling rapid prototyping, customization, and reduced material waste.
+          </p>
+          <p>With IT playing a pivotal role in reshaping manufacturing, there is also an immediate need to upskill the
+            workforce, leading to more efficient, agile, and innovative production processes that cater to evolving
+            customer demands while driving the industry towards a more sustainable future.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

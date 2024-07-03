@@ -1,0 +1,57 @@
+<!-- <div class="innerBanner bank product"
+  style="background-image: url('./assets/images/banner-images/energy-and-utilities.png');">
+  <h1 data-aos="fade-up"></h1>
+</div> -->
+<app-innerbanner [subTitle]="'MedTechMD'" [heading]="'MedTechMD'" btnText="let's talk"
+  [backgroundUrl]="'medtechmd.png'">
+</app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-up">
+          <img class="blogImg blog-banner" src="./assets/images/products/medtechmd.png" alt="about-img" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <h2>Elevating healthcare partnering with MedTechMD
+          </h2>
+          <p>GlobalSumi Technologies offers an extensive array of healthcare products and services through partnerships
+            with diverse product owners, notably MedTechMD. Our decade-long collaboration with MedTechMD has been
+            steadfast, providing unwavering support across their broad spectrum of healthcare offerings, ranging from
+            chronic health management to mobile-based remote monitoring and post-Covid-19 enablement services. Our joint
+            roster of products and services delivered in collaboration with MedTechMD reflects our commitment to
+            excellence in the healthcare industry.
+
+          </p>
+
+          <ul class="listStyle mt-3">
+            <li>Health checker & tracker</li>
+            <li>Triage </li>
+            <li>Covid-19 contact tracing</li>
+            <li>Personal health record</li>
+            <li>Pandemic surveillance and research</li>
+            <li>Telemedicine</li>
+
+          </ul>
+          <div class="mt-3">
+            <div class="btn-group">
+              <a href="{{sourcePath}}" target="_blank">Read more
+                <span class="right-arrow">
+                  <img src="./assets/images/button-arrow.png" alt="button-arrow" /> </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

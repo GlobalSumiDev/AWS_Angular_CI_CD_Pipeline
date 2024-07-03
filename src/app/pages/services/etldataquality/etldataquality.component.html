@@ -1,0 +1,73 @@
+<app-innerbanner [subTitle]="'ETL and Data Quality'"
+  [heading]="'Unlock your data\'s potential to drive informed decision-making and achieve business success.'"
+  btnText="let's talk" [backgroundUrl]="'etl.png'"></app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-up">
+          <img class="blogImg blog-banner" src="./assets/images/services/etl.png" alt="etl" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <h2>Business intelligence via ETL processess</h2>
+          <p>Efficient ETL operations empower businesses to delve into historical trends, identify emerging patterns,
+            and predict future developments. This equips stakeholders with invaluable insights, enabling strategic
+            planning, enhanced operational efficiency, and a competitive edge in today's data-centric business
+            landscape. Strong ETL processes are pivotal in unleashing the complete potential of business intelligence,
+            transforming raw data into invaluable insights that drive success. Streamlined ETL processes guarantee data
+            accuracy and quality, enabling organizations to make well-informed decisions based on reliable and
+            up-to-date information. They facilitate the consolidation of information from multiple platforms, databases,
+            or applications, offering a unified and comprehensive view of business operations.
+          </p>
+          <ul class="listStyle mt-3">
+            <li>Secure data integration</li>
+            <li>Data pipeline management</li>
+            <li>Code free transformation</li>
+            <li>Performance optimization</li>
+            <li>Open source community</li>
+            <li>Multiple complex sources</li>
+            <li>Cloud base platforms</li>
+            <li>Hybrid approach</li>
+
+          </ul>
+        </div>
+        <div class="content" data-aos="fade-up">
+          <h2>An optimal ETL process with Global Sumi
+          </h2>
+          <p>Opt for our ETL solutions to transform your data into a strategic asset. With seasoned expertise,
+            made-to-deliver approaches, and a focus on efficiency, we refine and optimize your data for reliable
+            insights. Our scalable solutions, coupled with stringent security measures, ensure seamless growth and
+            compliance. Choose us to unlock the full potential of your data for informed decision-making and business
+            success.
+          </p>
+
+          <div>
+            <div class="logos">
+              <ul class="p-0 services-logo">
+
+                <ngx-slick-carousel #slickModal="slick-carousel" [config]="autoLoopingLogo" class="">
+                <li ngxSlickItem><img src="./assets/images/services/logo/azure-data-factory.png" /></li>
+                <li><img src="./assets/images/services/logo/ssis.png" /></li>
+                <li><img src="./assets/images/services/logo/ibm-datastage.png" /></li>
+                <li> <img src="./assets/images/services/logo/talend.png" /></li>
+                <li> <img src="./assets/images/services/logo/informatica.png" /></li>
+                <li> <img src="./assets/images/services/logo/aws-glue.png" /></li>
+                </ngx-slick-carousel>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,79 @@
+<app-innerbanner [subTitle]="'Banking and Financials'"
+  [heading]="'With the power of cutting-edge IT solutions, we specialize in revolutionizing the Banking, Financial Services (BFS) sector.'"
+  btnText="let's talk" [backgroundUrl]="'banking-&-financials.png'"></app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-up">
+          <img class="blogImg blog-banner" src="./assets/images/industries/banking-financials.png"
+            alt="banking-financials" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <h2>Unlock the power of BFS with us</h2>
+          <p>With the power of cutting-edge IT solutions, we specialize in revolutionizing the
+            Banking, Financial Services (BFS) sector. We deliver value by integrating innovative
+            technology into core operations, offering scalable and secure systems that optimize
+            processes, improve data management, and enhance customer experiences. Our customized IT
+            solutions encompass data migration, advanced data analytics, AI-driven decision-making
+            tools, robust cybersecurity measures, and seamless integration of digital platforms.
+            Partnering with us means unlocking unparalleled efficiency, agility, and competitiveness
+            in the BFS domain, paving the way for sustainable growth and exceptional service
+            delivery.
+          </p>
+          <ul class="listStyle mt-3">
+            <li>Customer-focused services </li>
+            <li>Card services </li>
+            <li>Digital transformation using AI/ML </li>
+            <li>Advanced lending solutions </li>
+            <li>Core banking services</li>
+            <li>Wealth management</li>
+            <li>Investment banking </li>
+            <li>Fintech offerings</li>
+          </ul>
+        </div>
+        <div class="content" data-aos="fade-up">
+          <h2>Enhancing Customer Understanding in Banking: A Technological Approach</h2>
+          <p>In the dynamic landscape of banking, understanding customers is paramount for sustained success. However,
+            traditional banking methods often struggle to capture the nuanced preferences, behaviors, and needs of
+            today's diverse clientele. Conventional approaches fall short in comprehensively analyzing customer data,
+            leading to a lack of personalized services, and missed opportunities for customer engagement. This gap in
+            understanding hampers the ability of financial institutions to cater to individualized requirements and
+            limits their potential for growth.
+          </p>
+          <div class="row">
+            <div class="col-md-6" data-aos="fade-right">
+              <figure class="image-blog">
+                <img class="blogImg blog-banner" src="./assets/images/industries/img/banking-&-financials-2.png"
+                  alt="ai-&-ml" />
+              </figure>
+            </div>
+            <div class="col-md-6" data-aos="fade-left">
+              <figure>
+                <img class="blogImg blog-banner" src="./assets/images/industries/img/banking-&-financials-3.png"
+                  alt="ai-&-ml" />
+              </figure>
+            </div>
+          </div>
+          <div class="mt-3">
+            <div class="btn-group">
+              <a [routerLink]="['/bankfinancial/whitepaper']" fragment="start">Read more
+                <span class="right-arrow">
+                  <img src="./assets/images/button-arrow.png" alt="button-arrow" /> </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,78 @@
+<app-innerbanner [subTitle]="'Automation and Quality Engineering'"
+  [heading]="'Innovate, Accelerate, Automate: Your path to success.'" btnText="let's talk"
+  [backgroundUrl]="'automation.png'"></app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-up">
+          <img class="blogImg blog-banner" src="./assets/images/services/automation-quality-engineering.png"
+            alt="automation-quality" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <h2>Automation excellence for modern businesses
+          </h2>
+          <p>Digital services have become so intricately complex that the necessity for IT automation has arisen to
+            confront these challenges. The significant improvement in the trust of automation over the last decade has
+            led to the availability of a myriad of tools and technologies, facilitating a smoother transition. Beginning
+            with basic automation and progressing through robotic process automation, enhanced process automation, and
+            algorithmic automation, the automation framework has evolved into an intelligent computational landscape. It
+            is imperative for each business to analyze its processes and employ the appropriate tools to automate and
+            efficiently serve customers.
+
+
+          </p>
+          <ul class="listStyle mt-3">
+            <li>Hyper automation </li>
+            <li>Democratization of automation </li>
+            <li>Contiuous learning and adoption </li>
+            <li>Process automation </li>
+            <li>Quality engineering</li>
+            <li>Intelligent quality management</li>
+            <li>IOT automation </li>
+            <li>Performance engineering</li>
+          </ul>
+
+        </div>
+        <div class="content" data-aos="fade-up">
+          <h2>Inovate, accelerate, automate: your path to success </h2>
+          <p>The paradigm around business automation has evolved from questioning 'why automate' to embracing 'why not.'
+            In a market flooded with various automation frameworks, the strategic selection of the right fit for your
+            business is paramount for success. We help organizations meticulously select a customized blend of
+            automation frameworks. Supported by dedicated expertise in process automation, we guarantee optimal results
+            to elevate the efficiency of your business.
+
+          </p>
+          <div>
+            <div class="logos">
+              <ul class="p-0 services-logo">
+                <ngx-slick-carousel #slickModal="slick-carousel" [config]="autoLoopingLogo" class="">
+                <li ngxSlickItem> <img src="./assets/images/services/logo/selenium4.png" /></li>
+                <li><img src="./assets/images/services/logo/appium.png" /></li>
+                <li><img src="./assets/images/services/logo/testng.png" /></li>
+                <li><img src="./assets/images/services/logo/juunit.png" /></li>
+                <li><img src="./assets/images/services/logo/cucumber.png" /></li>
+                <li><img src="./assets/images/services/logo/blueprism.png" /></li>
+                <li><img src="./assets/images/services/logo/automation-anywhere.png" /></li>
+                <li><img src="./assets/images/services/logo/uipath.png" /></li>
+                <li><img src="./assets/images/services/logo/uft.png" /></li>
+                <li> <img src="./assets/images/services/logo/soapui.png" /></li>
+                <li><img src="./assets/images/services/logo/postman.png" /></li>
+                </ngx-slick-carousel>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,294 @@
+<app-innerbanner [subTitle]="'Careers'" [heading]="'Careers'" btnText="let's talk" [backgroundUrl]="'career.png'">
+</app-innerbanner>
+<section class="large-cap">
+  <div class="container">
+    <div class="runText" data-aos="slide-up">
+      <div class="content">
+        <h2>Forge your future: Empower your beliefs.</h2>
+        <p>As an organization of unparalleled scale, distinguished by a legacy of pioneering innovation and a
+          significant and influential client base, we afford our team members the chance to initiate transformative
+          change and elevate their personal and professional lives.
+
+        </p>
+      </div>
+    </div>
+    <div class="mt-5">
+      <div class="accordion" id="accordionExample" data-aos="fade-up">
+        <div class="accordion-item" *ngFor="let careerItem of careersData; let i = index">
+          <div class="accordion-header" [id]="'heading_' + i">
+            <div class="accordion-button" type="button" [attr.data-bs-toggle]="'collapse'" [attr.data-bs-target]="'#collapse_' + i"
+            [attr.aria-expanded]="i === 0 ? 'true' : 'false'" [attr.aria-controls]="'collapse_' + i">
+              <div class="titleDetails">
+                <span class="tags">{{careerItem.jobTime}}</span>
+              </div>
+              <div class="description">
+                <h6>{{careerItem.title}}</h6>
+              </div>
+              <div class="actionBtn non-collapsing" data-bs-toggle="collapse" data-bs-target>
+                <div class="btn-group mt-0">
+                  <button type="button" (click)="navigateToApplication(careerItem.id)">
+                    Apply Now
+                    <span class="right-arrow"><img src="./assets/images/button-arrow-green.png" alt="button-arrow"
+                        class="green-arrow" /><img src="./assets/images/button-arrow.png" alt="button-arrow"
+                        class="white-arrow" /></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div [id]="'collapse_' + i" class="accordion-collapse collapse" [class.show]="i === 0" [attr.aria-labelledby]="'heading_' + i"
+          data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div>
+                <h6 class="mb-2">Job description</h6>
+                <p>{{careerItem.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="accordion-item" data-aos="fade-up">
+          <div class="accordion-header" id="headingTwo">
+            <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <div class="titleDetails">
+                <span class="tags">Full time</span>
+              </div>
+              <div class="description">
+                <h6>Senior Software Engineer</h6>
+              </div>
+              <div class="actionBtn non-collapsing" data-bs-toggle="collapse" data-bs-target>
+                <div class="btn-group mt-0">
+                  <button type="button" (click)="navigateToApplication()">
+                    Apply Now
+                    <span class="right-arrow"> <img src="./assets/images/button-arrow-green.png" alt="button-arrow"
+                        class="green-arrow" /><img src="./assets/images/button-arrow.png" alt="button-arrow"
+                        class="white-arrow" /></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div>
+                <h6 class="mb-2">Job description</h6>
+                <p>Position based in Glen Allen, VA. Design, develop, test, and implement business applications using
+                  Java, J2EE,
+                  JavaScript, Spring, Spring Boot, JAX_RPC, SOAP UI, Hibernate, jQuery, AJAX, Angular JS, REST APIs,
+                  Clear Case,
+                  Maven in Unix, and Windows environment. Analyze user requirements and engage in all phases of SDLC.
+                  Convert business requirements into functional requirements to design, develop, test, and deploy
+                  features.
+                  Maintain source code in Bit Bucket and Bamboo using GIT and automate code deployment process.
+                  Implement
+                  DevOps platform and CI/CD pipelines. Create modules using Java Streams and Lambdas, Develop Stored
+                  Procedures using SQL and automate test cases using regression testing. Utilize Oracle and SQL Server
+                  to design
+                  and maintain databases. Require Bachelor's Degree or Foreign Equivalent in Computer Science or
+                  Mathematics or
+                  Engineering or Related with five years of experience in the job offered or related field. Job requires
+                  travel and/or
+                  relocation to various unanticipated client sites in the U.S. Mail resume to Global Sumi Technologies
+                  Inc.,
+                  Attn: HR Department, 11549 Nuckols Road, Suite B, Glen Allen, and VA - 23059.
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item" data-aos="fade-up">
+          <div class="accordion-header" id="headingThree">
+            <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              <div class="titleDetails">
+                <span class="tags">Full time</span>
+              </div>
+              <div class="description">
+                <h6>Senior Software Engineer</h6>
+              </div>
+              <div class="actionBtn non-collapsing" data-bs-toggle="collapse" data-bs-target>
+                <div class="btn-group mt-0">
+                  <button type="button" (click)="navigateToApplication()">
+                    Apply Now
+                    <span class="right-arrow"> <img src="./assets/images/button-arrow-green.png" alt="button-arrow"
+                        class="green-arrow" /><img src="./assets/images/button-arrow.png" alt="button-arrow"
+                        class="white-arrow" /></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div>
+                <h6 class="mb-2">Job description</h6>
+                <p>
+                  Position based in Glen Allen, VA. Analyze, design, develop, test, and implement Client/Server, Web
+                  based applications using Java EE, JQuery, JSP, JSF, XML, HTML, CSS, AJAX, Struts,Spring, Hibernate,
+                  Eclipse and SOAP in Unix, Linux, and Windows NT environment. Perform requirement gathering, analysis
+                  and estimation. Develop Integrated Management System (IMS) framework to visualize data. Develop
+                  centralized platform, eSMART BICM to generate reports. Utilize Java Web services to automate SOAP API.
+                  Engage in Unit Testing, Systems Integration Testing, UAT, Code Migration and Implementation. Utilize
+                  Oracle, MS-SQL and PostrgeSQL to design and maintain database. Require Bachelorâ€™s Degree or Foreign
+                  Equivalent in Computer Science or Information Technology or Equivalent with two years of experience in
+                  the job offered or related field. Job requires travel and/or relocation to various unanticipated
+                  client sites in the U.S.Mail resume to Global Sumi Technologies Inc., Attn: HR Department, 11549
+                  Nuckols Road, Suite B, Glen Allen, VA - 23059.
+
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item" data-aos="fade-up">
+          <div class="accordion-header" id="headingThree">
+            <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4"
+              aria-expanded="false" aria-controls="collapse4">
+              <div class="titleDetails">
+                <span class="tags">Full time</span>
+              </div>
+              <div class="description">
+                <h6>Senior Software Analyst</h6>
+              </div>
+              <div class="actionBtn non-collapsing" data-bs-toggle="collapse" data-bs-target>
+                <div class="btn-group mt-0">
+                  <button type="button" (click)="navigateToApplication()">
+                    Apply Now
+                    <span class="right-arrow"> <img src="./assets/images/button-arrow-green.png" alt="button-arrow"
+                        class="green-arrow" /><img src="./assets/images/button-arrow.png" alt="button-arrow"
+                        class="white-arrow" /></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div>
+                <h6 class="mb-2">Job description</h6>
+                <p>
+                  Position based in Glen Allen, VA. Analyze business requirements to automate processing and enhance
+                  existing systems. Design, develop and implement applications and systems using C, C++, JavaScript,
+                  PL/SQL, eScript, Smart Script, HTML, Shell Script, Siebel EIM, Siebel, EAI under Unix and Windows
+                  environment. Develop and configure screens, views and objects in Siebel CRM to facilitate business
+                  process flows. Implement and maintain various Siebel Workflows and develop Integration Interfaces
+                  between Siebel CRM and third-party applications. Perform Data Mapping and Data Migration and engage in
+                  coding and testing of Siebel tools. Develop SQL scripts for data migration and legacy systems and
+                  execute EIM in Siebel. Map systems into various performance databases such as MS-SQL Services and
+                  Oracle. Engage un unit, integration and system testing. Require Bachelorâ€™s Degree or Equivalent in
+                  Computer Science or Engineering or Related Field with two years of experience in the job offered. Job
+                  requires travel and/or relocation to various unanticipated client sites in the U.S. Mail resume to
+                  Global Sumi Technologies Inc., Attn: HR Department,
+                  11549 Nuckols Road, Suite B, Glen Allen, VA - 23059.
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item" data-aos="fade-up">
+          <div class="accordion-header" id="headingThree">
+            <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5"
+              aria-expanded="false" aria-controls="collapse5">
+              <div class="titleDetails">
+                <span class="tags">Full time</span>
+              </div>
+              <div class="description">
+                <h6>Senior Programmer Analyst</h6>
+
+              </div>
+              <div class="actionBtn non-collapsing" data-bs-toggle="collapse" data-bs-target>
+                <div class="btn-group mt-0">
+                  <button type="button" (click)="navigateToApplication()">
+                    Apply Now
+                    <span class="right-arrow"> <img src="./assets/images/button-arrow-green.png" alt="button-arrow"
+                        class="green-arrow" /><img src="./assets/images/button-arrow.png" alt="button-arrow"
+                        class="white-arrow" /></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div>
+                <h6 class="mb-2">Job description</h6>
+                <p>
+                  Position based in Glen Allen, VA. Design, develop, test, and implement business applications using C#,
+                  C#.NET, Visual Basic, VB Script, ASP,
+                  ASP.NET, FACETS & QNXT Trizetto tool, CSS, HTML, XML, JIRA, PL/SQL Server and MS-Visual Safe in Unix
+                  and Windows environment.
+                  Develop software solutions by studying systems flow, data usage , processes and information.
+                  Conferring with users and Subject Matter Experts,
+                  investigating problems and providing solutions. Create technical design documents, system use case
+                  documents, process flow diagrams and
+                  user defined functions. Engage in requirement gathering and system analysis and involve in code
+                  review. Write and debug complex stored
+                  procedures, triggers, and inner joins. Develop test scripts and perform User Acceptance testing.
+                  Utilize SQL Server and DataStage to design
+                  and develop ETL Jobs in Software Development Life Cycle (SDLC). Utilize Oracle, PL/SQL, and Sybase to
+                  design and maintain databases. Require
+                  Bachelorâ€™s Degree or Foreign Equivalent in Computer Science or Computer Information Systems or
+                  Related with five years of experience in the
+                  job offered or related field. Job requires travel and/or relocation to various unanticipated client
+                  sites in the U.S. Mail resume to
+                  Global Sumi Technologies Inc., Attn: HR Department, 11549 Nuckols Road, Suite B, Glen Allen, VA -
+                  23059.
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+<section class="large-cap sliverBg">
+  <div class="container">
+    <div class="row col-change">
+      <div class="col-lg-6 col-sm-12" data-aos="fade-right">
+        <div class="text-center">
+          <figure>
+            <img src="./assets/images/why-global-sumi.png" alt="why-global-sumi" />
+          </figure>
+        </div>
+      </div>
+      <div class="col-lg-6 col-sm-12 d-flex align-items-center" data-aos="fade-left">
+        <div class="mob-align">
+          <h6 class="sub-title">Work With Us</h6>
+          <h2>Why Global Sumi?</h2>
+          <p>In today's dynamic job market, selecting the right company for your career in information technology (IT)
+            is crucial for long-term success and professional fulfillment. Here are compelling reasons why choosing our
+            company can be a game-changer for your IT career. </p>
+          <ul class="listStyle my-3 py-2">
+            <li>Innovative environment</li>
+            <li>Learning and development</li>
+            <li>Mentorship and support</li>
+            <li>Diverse and inclusive culture</li>
+            <li>Opportunities for advancement</li>
+            <li>Work-life balance</li>
+
+          </ul>
+          <p class="mt-2">Choosing Global Sumi for your career in IT offers a wealth of opportunities for growth,
+            learning, and fulfillment. With our innovative environment, supportive culture, and commitment to your
+            success, we are dedicated to helping you reach your full potential and achieve your career aspirations in
+            the dynamic field of IT.
+          </p>
+          <!-- <div class="btn-group">
+            <a href="#" target="_top">Read More
+              <span class="right-arrow">
+                <img src="./assets/images/button-arrow.png" alt="button-arrow" /> </span>
+            </a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
