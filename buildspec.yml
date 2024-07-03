@@ -14,11 +14,6 @@ phases:
       - echo Building Angular application...
       - ng build --configuration=production  # Replace with your build command
 
-  post_build:
-    commands:
-      - echo Copying build artifacts...
-      - if [ -d "dist" ]; then cp -r dist/* $CODEBUILD_SRC_DIR/; else echo "No dist directory found"; fi
-
 artifacts:
   files:
     - '**/*'
