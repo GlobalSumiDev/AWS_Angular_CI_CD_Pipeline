@@ -14,7 +14,12 @@ phases:
       - echo Building Angular application...
       - ng build --configuration=production  # Replace with your build command
 
+  post_build:
+  commands:
+    - echo Copying build artifacts...
+    - if [ -d "dist/sumitech" ]; then cp -r dist/sumitech/* $CODEBUILD_SRC_DIR/; else echo "No dist/sumitech directory found"; fi
+
 artifacts:
   files:
     - '**/*'
-  base-directory: 'dist'
+  base-directory: 'dist/sumitech'
