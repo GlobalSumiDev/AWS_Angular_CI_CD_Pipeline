@@ -4,9 +4,10 @@ phases:
   install:
     commands:
       - echo Installing dependencies...
-      - yum update -y  # Update all packages to latest
-      - yum install -y --allowerasing gcc make openssl curl jq  # Use --allowerasing to resolve conflicts
-      - npm install -g @angular/cli  # Install Angular CLI globally
+      - yum update -y
+      - yum install -y --allowerasing gcc make openssl jq
+      - npm install -g @angular/cli
+      - npm install  # Install project dependencies
 
   build:
     commands:
@@ -16,4 +17,4 @@ phases:
   post_build:
     commands:
       - echo Copying build artifacts...
-      - cp -r dist/* $CODEBUILD_OUTPUT_ROOT/  # Replace 'dist' with your output folder
+      - if [ -d "dist" ]; then cp -r dist/* $CODEBUILD_OUTPUT_ROOT/; else echo "No dist directory found"; fi
