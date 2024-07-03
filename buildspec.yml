@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing dependencies...
+      - yum install -y gcc make openssl curl jq # (Optional dependencies for Angular build)
+      - npm install -g @angular/cli  # Install Angular CLI globally
+
+  build:
+    commands:
+      - echo Building Angular application...
+      - ng build --configuration=production  # Replace with your build command
+
+  post_build:
+    commands:
+      - echo Copying build artifacts...
+      - cp -r dist/* $CODEBUILD_OUTPUT_ROOT/  # Replace 'dist' with your output folder
