@@ -4,7 +4,8 @@ phases:
   install:
     commands:
       - echo Installing dependencies...
-      - yum install -y gcc make openssl curl jq # (Optional dependencies for Angular build)
+      - yum update -y  # Update all packages to latest
+      - yum install -y --allowerasing gcc make openssl curl jq  # Use --allowerasing to resolve conflicts
       - npm install -g @angular/cli  # Install Angular CLI globally
 
   build:
