@@ -135,11 +135,13 @@
         <li class="menu-item" (click)="closeMenu()"><a routerLink="/contactus" routerLinkActive="menu-active"
             class="menu-link">Contact us</a>
         </li>
-        <!-- <li class="menu-item btn-group"><a routerLink="/" class="menu-link">Register / Login
+        <li class="menu-item btn-group" (click)="closeMenu()">
+          <a routerLink="/registration" routerLinkActive="menu-active" class="menu-link">Register
             <span class="right-arrow">
-              <img src="./assets/images/button-arrow.png" alt="button-arrow" /> </span>
+              <img src="./assets/images/button-arrow.png" alt="button-arrow" />
+            </span>
           </a>
-        </li> -->
+        </li>
       </ul>
     </nav>
   </div>

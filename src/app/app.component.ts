@@ -5,8 +5,9 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ScrollToTopService } from './scroll-to-top.service';
 import { ReactiveFormsModule } from '@angular/forms';
-// import AOS from 'aos';
 import { HttpClientModule } from '@angular/common/http';
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -18,8 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     ReactiveFormsModule,
-    HttpClientModule,
-
+    HttpClientModule
+    
   ],
   providers: [ScrollToTopService],
 

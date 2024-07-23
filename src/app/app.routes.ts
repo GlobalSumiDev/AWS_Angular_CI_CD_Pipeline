@@ -33,6 +33,10 @@ import { HealthcarewhiteComponent } from './pages/industries/whitepaper/healthca
 import { EnergywhiteComponent } from './pages/industries/whitepaper/energywhite/energywhite.component';
 import { MobilitywhiteComponent } from './pages/industries/whitepaper/mobilitywhite/mobilitywhite.component';
 import { MediawhiteComponent } from './pages/industries/whitepaper/mediawhite/mediawhite.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import { LoginComponent } from './pages/login/login.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
 
@@ -69,6 +73,9 @@ export const routes: Routes = [
   { path: 'energyutilities/whitepaper', component: EnergywhiteComponent, title: "Energy and Utilities Whitepaper - Sumitech" },
   { path: 'mobility-hospitality/whitepaper', component: MobilitywhiteComponent, title: "Mobility And Hospitality Whitepaper - Sumitech" },
   { path: 'media-communications/whitepaper', component: MediawhiteComponent, title: "Media And Communication Whitepaper - Sumitech" },
+  { path: 'registration', component: RegistrationComponent, title: "Registration - Sumitech" },
+  { path: 'welcome', component: WelcomeComponent, canActivate: [authGuard] },
+  { path: 'login', component: LoginComponent },
 
 ];
 @NgModule({

@@ -4,7 +4,8 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "types": [
-      "jquery"
+      "jquery",
+      "intl-tel-input"
     ],
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,

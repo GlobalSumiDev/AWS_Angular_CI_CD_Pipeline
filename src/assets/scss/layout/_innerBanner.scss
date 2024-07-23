@@ -79,6 +79,10 @@
     }
   }
 
+  .bg-image {
+    overflow-y: scroll; /* Enable vertical scrolling for the section */
+  }
+
   .inner-content {
     // opacity: 0;
     width: 85%;
