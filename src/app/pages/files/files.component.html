@@ -1,0 +1,56 @@
+<section class="bg-image" style="background-color: #f8f9fa;">
+  <div class="container py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-15 col-xl-18">
+        <!-- <div class="card shadow-sm border-3" style="border-radius: 15px; border-width: 10px;"> -->
+          <div class="card-body p-4">
+            <h2 class="text-center mb-4">Manage Files in {{ folderName }}</h2>
+            <div class="col-12">
+
+              <!-- File Upload Form -->
+              <!-- <form (ngSubmit)="uploadFile()" class="mb-4"> -->
+                <!-- <form> -->
+                 <div class="input-group">
+
+                  <input type="file" (change)="onFileChange($event)" class="form-control" accept="*/*" style="border-radius: 5px 0 0 5px;">
+                  <button type="submit" (click)="uploadFile()" class="btn btn-primary" style="border-radius: 0 5px 5px 0;">Upload File</button>
+                </div> 
+              <!-- </form>  -->
+              <div *ngIf="files.length > 0">
+                <h3 class="mb-3 text-secondary">Uploaded Files</h3>
+                <table class="table table-hover">
+                  <thead class="table-dark">
+                    <tr>
+                      <th scope="col">Upload Time</th>
+                      <th scope="col">File Name</th>
+                      <th scope="col">File Size</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let file of files">
+                      <td>{{ file.uploadTime }}</td>
+                      <td>{{ file.name }}</td>
+                      <td>{{ file.size }} KB</td>
+                      <td>
+                         <button type="button" class="btn btn-info btn-sm me-2" (click)="downloadFile(file.name)">Download</button>
+                         <button type="button" class="btn btn-danger btn-sm" (click)="deleteFile(file.name)">Delete</button> 
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div> 
+               <div *ngIf="files.length === 0 && noFilesMessage" class="text-center">
+                <p class="text-muted">{{ noFilesMessage }}</p>
+              </div>
+               <div class="text-center">
+                <a [routerLink]="['/welcome']" class="btn btn-secondary mt-4">Back to Folders</a>
+              </div>  
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+</section>

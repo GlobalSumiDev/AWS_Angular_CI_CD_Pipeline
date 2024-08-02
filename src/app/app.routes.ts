@@ -37,6 +37,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { LoginComponent } from './pages/login/login.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { authGuard } from './guards/auth.guard';
+import { FilesComponent } from './pages/files/files.component';
 
 export const routes: Routes = [
 
@@ -74,8 +75,9 @@ export const routes: Routes = [
   { path: 'mobility-hospitality/whitepaper', component: MobilitywhiteComponent, title: "Mobility And Hospitality Whitepaper - Sumitech" },
   { path: 'media-communications/whitepaper', component: MediawhiteComponent, title: "Media And Communication Whitepaper - Sumitech" },
   { path: 'registration', component: RegistrationComponent, title: "Registration - Sumitech" },
-  { path: 'welcome', component: WelcomeComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'welcome', component: WelcomeComponent, canActivate: [authGuard] },
+  { path: ':folderName/files', component: FilesComponent, canActivate: [authGuard] },
 
 ];
 @NgModule({

@@ -10,19 +10,26 @@ export class AuthenticationService {
 
   private apiUrl = 'http://localhost:8080/authenticate';  // Update with your backend API URL
   private tokenKey = 'authToken';
+  private currentUserEmailKey = 'currentUserEmail';
 
-  private currentUserSubject = new BehaviorSubject<any>(null);
-  public currentUser = this.currentUserSubject.asObservable();
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const storedUser = localStorage.getItem(this.currentUserEmailKey);
+    this.currentUserSubject = new BehaviorSubject<any>(storedUser ? JSON.parse(storedUser) : null);
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
 
   // Login method to authenticate user
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post<any>(this.apiUrl, credentials).pipe(
       tap(response => {
+        console.log('Login response:', response);  // Log the response to check its content
         if (response && response.token) {
           this.storeToken(response.token);
-          this.currentUserSubject.next(response.user);
+          const user = { email: credentials.email };
+          this.setCurrentUser(user);  // Store user in both BehaviorSubject and localStorage
         }
       })
     );
@@ -38,15 +45,28 @@ export class AuthenticationService {
     return localStorage.getItem(this.tokenKey);
   }
 
-  // Method to log out user
-  logout(): void {
-    localStorage.removeItem(this.tokenKey);
-    this.currentUserSubject.next(null);
-  }
-
   // Method to check if user is authenticated
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
-}
 
+  // Retrieve the current user's email
+  getCurrentUserEmail(): string | null {
+    const currentUser = this.currentUserSubject.value;
+    console.log('Current user:', currentUser);  // Log current user to verify the email is set
+    return currentUser ? currentUser.email : null;
+  }
+
+  // Set the current user and persist it
+  setCurrentUser(user: any): void {
+    this.currentUserSubject.next(user);
+    localStorage.setItem(this.currentUserEmailKey, JSON.stringify(user));
+  }
+
+  // Logout the user and clear stored data
+  logout(): void {
+    this.currentUserSubject.next(null);
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.currentUserEmailKey);
+  }
+}

@@ -1,1 +1,38 @@
-<p>welcome works!</p>
+
+
+<section class="bg-light py-5">
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-20 col-xl-15">
+                <div class="card-body p-4">
+        <h2 class="text-center mb-4">Welcome to Your Storage</h2>
+        <div class="col-12">
+        <!-- Create Folder Form -->
+        <form [formGroup]="createFolderForm" (ngSubmit)="createFolder()" class="mb-5">
+            <div class="input-group mb-3">
+                <input formControlName="folderName" class="form-control" placeholder="New Folder Name">
+                <button type="submit" class="btn btn-primary">Create Folder</button>
+            </div>
+        </form>
+
+        <!-- Folder List -->
+        <div class="folder-list">
+            <h3 class="mb-4">Your Folders</h3>
+            <div class="row">
+                <div class="col-md-3 col-sm-4 mb-4" *ngFor="let folder of folders">
+                    <div class="card folder-card text-center p-3" (click)="selectFolder(folder)"
+                        style="cursor: pointer;">
+                        <img src="./assets/images/Folder_Image.png" class="card-img-top" alt="Folder Icon">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ folder }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</section>
