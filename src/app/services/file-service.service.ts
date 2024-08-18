@@ -1,40 +1,115 @@
+// file-service.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Folder } from '../pages/model/folder.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
-  private baseUrl = '/api/files';  // Base URL for the backend
+  private apiUrl = 'http://localhost:8081/api/files';
+  private folderUrl ='http://localhost:8081/api/folders';
 
   constructor(private http: HttpClient) {}
 
-  getFiles(folderName: string, userEmail: string): Observable<FileInfo[]> {
-    return this.http.get<FileInfo[]>(`${this.baseUrl}?folderName=${folderName}&userEmail=${userEmail}`);
-  }
+  
 
-  uploadFile(file: File, folderName: string, userEmail: string): Observable<any> {
+ 
+
+
+  uploadParentFile( parentFolderName: string, userEmail: string, file: File): Observable<any> {
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('folderName', folderName);
+    formData.append('parentFolderName', parentFolderName);
     formData.append('userEmail', userEmail);
-    return this.http.post(`${this.baseUrl}/upload`, formData);
+    formData.append('file', file);
+
+    return this.http.post<any>(`${this.apiUrl}/upload`, formData)
+      .pipe(catchError(this.handleError));
   }
 
-  downloadFile(fileId: number): Observable<Blob> {
-    return this.http.get(`${this.baseUrl}/download?fileId=${fileId}`, { responseType: 'blob' });
+  uploadParentSubChildFile( parentFolderName: string, parentSubFolderName:string,file: File, userEmail: string ): Observable<any> {
+    const formData = new FormData();
+    formData.append('parentFolderName', parentFolderName);
+    formData.append('parentSubFolderName', parentSubFolderName);
+    formData.append('file', file);
+    formData.append('userEmail', userEmail);
+
+    return this.http.post<any>(`${this.apiUrl}/uploadParentSubFile`, formData)
+      .pipe(catchError(this.handleError));
   }
 
-  deleteFile(fileId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}?fileId=${fileId}`);
+  uploadParentSubFolderFile( parentFolderName: string, parentSubFolderName:string, parentSubChildFoldername:string, file: File, userEmail: string ): Observable<any> {
+    const formData = new FormData();
+    formData.append('parentFolderName', parentFolderName);
+    formData.append('parentSubFolderName', parentSubFolderName);
+    formData.append('parentSubChildFoldername', parentSubChildFoldername);
+    formData.append('file', file);
+    formData.append('userEmail', userEmail);
+
+    return this.http.post<any>(`${this.apiUrl}/uploadParentSubChildFile`, formData)
+      .pipe(catchError(this.handleError));
   }
+
+  uploadParentSubFinalChildFile( parentFolderName: string, parentSubFolderName:string, parentSubChildFoldername:string, parentSubFinalChildFoldername:string, file: File, userEmail: string ): Observable<any> {
+    const formData = new FormData();
+    formData.append('parentFolderName', parentFolderName);
+    formData.append('parentSubFolderName', parentSubFolderName);
+    formData.append('parentSubChildFoldername', parentSubChildFoldername);
+    formData.append('parentSubFinalChildFoldername', parentSubFinalChildFoldername);
+    formData.append('file', file);
+    formData.append('userEmail', userEmail);
+
+    return this.http.post<any>(`${this.apiUrl}/uploadParentSubFinalChildFile`, formData)
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteFile(fileName: string, parentFolderName: string, userEmail: string): Observable<void> {
+    const params = new HttpParams()
+      .set('fileName', encodeURIComponent(fileName))
+      .set('parentFolderName', parentFolderName)
+      .set('userEmail', userEmail);
+  
+    return this.http.delete<void>(`${this.apiUrl}/delete`, { params })
+      .pipe(catchError(this.handleError));
+  }
+  
+
+  downloadFile(fileName: string, parentFolderName: string, userEmail: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/download/${fileName}?parentFolderName=${parentFolderName}&userEmail=${userEmail}`, {
+      responseType: 'blob' 
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  
+
+
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('An error occurred:', error.message);
+    return throwError('Something went wrong; please try again later.');
+  }
+
+  getParentSubFolderFilesName(parentFolderName: string, parentSubFolderName: string, userEmail: any) {
+    return this.http.get<any[]>(`${this.apiUrl}/parentSubFolder/Files?parentFolderName=${parentFolderName}&parentSubFolderName=${parentSubFolderName}&userEmail=${userEmail}`)
+    .pipe(catchError(this.handleError));
+  }
+
+  getParentSubFinalChildFolderFilesName(parentFolderName: string, parentSubFolderName: string,parentSubChildFoldername:string, parentSubFinalChildFoldername:string,userEmail: any) {
+    return this.http.get<any[]>(`${this.apiUrl}/parentSubChildFinalFolder?parentFolderName=${parentFolderName}&parentSubFolderName=${parentSubFolderName}&parentSubChildFoldername=${parentSubChildFoldername}&parentSubFinalChildFoldername=${parentSubFinalChildFoldername}&userEmail=${userEmail}`)
+    .pipe(catchError(this.handleError));
+  }
+
+  getParentSubChildFolderFilesName(parentFolderName: string, parentSubFolderName: string,parentSubChildFoldername:string, userEmail: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/parentSubChildFolder/Files?parentFolderName=${parentFolderName}&parentSubFolderName=${parentSubFolderName}&parentSubChildFoldername=${parentSubChildFoldername}&userEmail=${userEmail}`)
+        .pipe(catchError(this.handleError));
 }
-
-export interface FileInfo {
-  id: number;
-  name: string;
-  size: any;
-  uploadTime: string;
-  userEmail: string;
+getFiles(parentFolderName: string, userEmail: any): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/parentFolder?parentFolderName=${parentFolderName}&userEmail=${userEmail}`)
+    .pipe(catchError(this.handleError));
+}
 }

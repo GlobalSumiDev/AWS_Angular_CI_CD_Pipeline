@@ -39,6 +39,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { authGuard } from './guards/auth.guard';
 import { FilesComponent } from './pages/files/files.component';
 
+
 export const routes: Routes = [
 
   { path: '', component: HomeComponent, title: "Sumitech" },
@@ -77,8 +78,9 @@ export const routes: Routes = [
   { path: 'registration', component: RegistrationComponent, title: "Registration - Sumitech" },
   { path: 'login', component: LoginComponent },
   { path: 'welcome', component: WelcomeComponent, canActivate: [authGuard] },
-  { path: ':folderName/files', component: FilesComponent, canActivate: [authGuard] },
-
+  { path: ':ParentFolderName/files', component: FilesComponent, canActivate: [authGuard] },  
+  { path: ':ParentFolderName/:ParentSubFolderName/files', component: FilesComponent, canActivate: [authGuard] },
+  { path: ':ParentFolderName/:ParentSubFolderName/:ParentSubChildFolderName/files', component: FilesComponent, canActivate: [authGuard] },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

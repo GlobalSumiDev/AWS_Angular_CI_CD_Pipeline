@@ -16,8 +16,12 @@ export class AuthenticationService {
   public currentUser: Observable<any>;
 
   constructor(private http: HttpClient) {
-    const storedUser = localStorage.getItem(this.currentUserEmailKey);
-    this.currentUserSubject = new BehaviorSubject<any>(storedUser ? JSON.parse(storedUser) : null);
+    if (typeof window !== 'undefined') {
+      const storedUser = localStorage.getItem(this.currentUserEmailKey);
+      this.currentUserSubject = new BehaviorSubject<any>(storedUser ? JSON.parse(storedUser) : null);
+    } else {
+      this.currentUserSubject = new BehaviorSubject<any>(null);
+    }
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -37,12 +41,14 @@ export class AuthenticationService {
 
   // Method to store JWT token in localStorage
   private storeToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(this.tokenKey, token);
+    }
   }
 
   // Method to retrieve JWT token from localStorage
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return typeof window !== 'undefined' ? localStorage.getItem(this.tokenKey) : null;
   }
 
   // Method to check if user is authenticated
@@ -60,13 +66,17 @@ export class AuthenticationService {
   // Set the current user and persist it
   setCurrentUser(user: any): void {
     this.currentUserSubject.next(user);
-    localStorage.setItem(this.currentUserEmailKey, JSON.stringify(user));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(this.currentUserEmailKey, JSON.stringify(user));
+    }
   }
 
   // Logout the user and clear stored data
   logout(): void {
     this.currentUserSubject.next(null);
-    localStorage.removeItem(this.tokenKey);
-    localStorage.removeItem(this.currentUserEmailKey);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(this.tokenKey);
+      localStorage.removeItem(this.currentUserEmailKey);
+    }
   }
 }

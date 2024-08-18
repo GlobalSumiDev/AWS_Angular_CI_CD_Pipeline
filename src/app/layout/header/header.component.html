@@ -135,13 +135,23 @@
         <li class="menu-item" (click)="closeMenu()"><a routerLink="/contactus" routerLinkActive="menu-active"
             class="menu-link">Contact us</a>
         </li>
-        <li class="menu-item btn-group" (click)="closeMenu()">
-          <a routerLink="/registration" routerLinkActive="menu-active" class="menu-link">Register
+        <!-- <li class="menu-item btn-group" (click)="closeMenu()">
+          <a routerLink="/login" routerLinkActive="menu-active" class="menu-link">Login
             <span class="right-arrow">
               <img src="./assets/images/button-arrow.png" alt="button-arrow" />
             </span>
           </a>
+        </li>  -->
+        <li class="menu-item btn-group">
+          <a routerLink="/login" routerLinkActive="menu-active" class="menu-link" *ngIf="!isLoggedIn">Login
+            <span class="right-arrow">
+              <img src="./assets/images/button-arrow.png" alt="button-arrow" />
+            </span>
+          </a>
+          <a class="menu-link" (click)="logout()" *ngIf="isLoggedIn">Logout</a>
         </li>
+       
+        
       </ul>
     </nav>
   </div>

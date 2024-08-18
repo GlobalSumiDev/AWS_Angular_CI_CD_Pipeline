@@ -1,6 +1,7 @@
-import { RouterOutlet, RouterLink, RouterLinkActive, NavigationStart } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, NavigationStart, Router } from '@angular/router';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -11,14 +12,23 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.scss'
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
   isActive: boolean = false;
   navbar: any;
   industries: boolean = false;
   services: boolean = false;
   products: boolean = false;
-
   isSticky: boolean = false;
+  isLoggedIn: boolean = false;
+
+  constructor(private authService: AuthenticationService, private router: Router) { }
+
+  ngOnInit() {
+    // Subscribe to authentication state
+    this.authService.currentUser.subscribe(user => {
+      this.isLoggedIn = !!user;
+    });
+  }
 
   onScroll(event: any) {
     // You can adjust the threshold based on your needs
@@ -54,6 +64,11 @@ export class HeaderComponent {
   }
   openProducts() {
     this.products = !this.products;
+  }
+  logout() {
+    this.authService.logout();
+    this.isLoggedIn = false;
+    this.router.navigate(['']); // Redirect to login page
   }
 
 }
