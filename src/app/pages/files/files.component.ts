@@ -31,6 +31,7 @@ export class FilesComponent implements OnInit {
   parentFolders: Folder[] = [];
   parentSubFolders: Folder[] = [];
   parentSubChildFolders: Folder[] = [];
+  
 
   constructor(
     private fileService: FileService,
@@ -43,36 +44,42 @@ export class FilesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Get the parent and subfolder names from the route parameters
-    this.route.paramMap.subscribe(params => {
-      this.parentFolderName = params.get('ParentFolderName');
-      this.parentSubFolderName = params.get('ParentSubFolderName');
-      this.parentSubChildFoldername = params.get('ParentSubChildFolderName');
-      console.log('Parent Folder Name:', this.parentFolderName);
-      console.log('Parent Sub Folder Name:', this.parentSubFolderName);
-      console.log('Parent Sub Child Folder Name:', this.parentSubChildFoldername);
-    });
+  // Debug: Check the route parameters
+  this.route.paramMap.subscribe(params => {
+    this.parentFolderName = params.get('ParentFolderName');
+    this.parentSubFolderName = params.get('ParentSubFolderName');
+    this.parentSubChildFoldername = params.get('ParentSubChildFolderName');
+    this.parentSubFinalChildFoldername = params.get('ParentSubFinalChildFolderName');
+    console.log('Route parameters:', this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername, this.parentSubFinalChildFoldername);
+  });
 
-    // Get the current user email
-    this.userEmail = this.authService.getCurrentUserEmail();
+  // Debug: Check current user email
+  this.userEmail = this.authService.getCurrentUserEmail();
+  console.log('Current user email:', this.userEmail);
 
-    // Load folders first
-    if (this.parentSubChildFoldername) {
-      this.loadFolders(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername);
-      this.loadFiles(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername);
-    } else if (this.parentSubFolderName) {
-      this.loadFolders(this.parentFolderName, this.parentSubFolderName);
-      this.loadFiles(this.parentFolderName, this.parentSubFolderName);
-    } else if (this.parentFolderName) {
-      this.loadFolders(this.parentFolderName);
-      this.loadFiles(this.parentFolderName);
-    }
-
-    // Initialize the form for creating a new folder
-    this.createFolderForm = this.fb.group({
-      folderName: ['', Validators.required]
-    });
+  // Debug: Determine which folders to load
+  if(this.parentSubFinalChildFoldername){
+    console.log('Loading files for sub- Final - child folder...');
+    this.loadFiles(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername, this.parentSubFinalChildFoldername);
+  }else if (this.parentSubChildFoldername) {
+    console.log('Loading folders and files for sub-child folder...');
+    this.loadFolders(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername);
+    this.loadFiles(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername);
+  } else if (this.parentSubFolderName) {
+    console.log('Loading folders and files for subfolder...');
+    this.loadFolders(this.parentFolderName, this.parentSubFolderName);
+    this.loadFiles(this.parentFolderName, this.parentSubFolderName);
+  } else if (this.parentFolderName) {
+    console.log('Loading folders and files for parent folder...');
+    this.loadFolders(this.parentFolderName);
+    this.loadFiles(this.parentFolderName);
   }
+
+  // Initialize the form for creating a new folder
+  this.createFolderForm = this.fb.group({
+    folderName: ['', Validators.required]
+  });
+}
 
   onFileChange(event: any): void {
     this.selectedFile = event.target.files[0] || null;
@@ -88,17 +95,56 @@ export class FilesComponent implements OnInit {
   
     if (uploadObservable) {
       uploadObservable.subscribe(
-        () => {
-          this.toastr.success('File uploaded successfully!');
-          this.loadFiles(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername, this.parentSubFinalChildFoldername);
+        (response: any) => {
+          if (response.message === 'File uploaded successfully') {
+            this.toastr.success('File uploaded successfully!');
+            // Clear the file input and form values
+            this.resetForm();
+            // Reload files to reflect the uploaded file
+            if (this.parentSubFinalChildFoldername) {
+              this.loadFiles(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername, this.parentSubFinalChildFoldername);
+            } else if (this.parentSubChildFoldername) {
+              this.loadFiles(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername);
+            } else if (this.parentSubFolderName) {
+              this.loadFiles(this.parentFolderName, this.parentSubFolderName);
+            } else {
+              this.loadFiles(this.parentFolderName);
+            }
+          } else if (response.message === 'File already exists') {
+            this.toastr.warning('File already exists. Please choose a different file.');
+            this.resetForm();
+          } else {
+            this.toastr.error('Failed to upload file.');
+            this.resetForm();
+          }
         },
         (error) => {
-          this.toastr.error('Failed to upload file.');
-          console.error('Error:', error);
+          
+           if (error.message === 'File already exists') {
+            this.toastr.warning('File already exists. Please choose a different file.');
+            this.resetForm();
+          } else  {
+            this.toastr.error('Failed to upload file.');
+            this.resetForm();
+            console.error('Error:', error);
+          }
+
         }
       );
     }
   }
+  
+  private resetForm(): void {
+    // Reset the selected file
+    this.selectedFile = null;
+    
+    // Clear the file input element
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  }
+  
   
   private getUploadObservable() {
     if (this.parentSubFinalChildFoldername) {
@@ -152,9 +198,16 @@ export class FilesComponent implements OnInit {
           (response: any) => {
             this.toastr.success('File deleted successfully!');
             console.log('File deleted, loading files...');
-            if (this.parentSubFolderName) {
+            // Re-load files after deletion
+            if (this.parentSubFinalChildFoldername) {
+              this.loadFiles(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername, this.parentSubFinalChildFoldername);
+              console.log('File Deletion for parentFolder: calling load files',this.parentSubFinalChildFoldername, this.parentSubChildFoldername );
+           } else if (this.parentSubChildFoldername) {
+              this.loadFiles(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername);
+              console.log('File Deletion for parent Sub Folder: calling load Sub files', this.parentSubChildFoldername );
+            } else if (this.parentSubFolderName) {
               this.loadFiles(this.parentFolderName, this.parentSubFolderName);
-            } else {
+            }else {
               this.loadFiles(this.parentFolderName);
             }
           },
@@ -163,142 +216,150 @@ export class FilesComponent implements OnInit {
             console.error('Error:', error);
           }
         );
-    }
-  }
-
-
-  loadFiles(parentFolderName: string, parentSubFolderName?: string, parentSubChildFoldername?: string, parentSubFinalChildFoldername?: string): void {
-    console.log('Loading files for:', parentFolderName, 'Subfolder:', parentSubFolderName, 'SubChildFolder:', parentSubChildFoldername, 'SubFinalChildFolder:', parentSubFinalChildFoldername);
-    console.log('User Email:', this.userEmail);
-
-    if (!this.userEmail || !parentFolderName) {
-        console.error('Missing folderName or userEmail.');
-        return;
-    }
-
-    let fileObservable;
-
-    if (parentSubFinalChildFoldername && parentSubChildFoldername && parentSubFolderName) {
-        // Load files from the sub-final child folder
-        console.log('Loading files from sub-final child folder...');
-        fileObservable = this.fileService.getParentSubFinalChildFolderFilesName(parentFolderName, parentSubFolderName, parentSubChildFoldername, parentSubFinalChildFoldername, this.userEmail);
-    } else if (parentSubChildFoldername && parentSubFolderName) {
-        // Load files from the sub-child folder
-        console.log('Loading files from sub-child folder...');
-        fileObservable = this.fileService.getParentSubChildFolderFilesName(parentFolderName, parentSubFolderName, parentSubChildFoldername, this.userEmail);
-    } else if (parentSubFolderName) {
-        // Load files from the subfolder
-        console.log('Loading files from subfolder...');
-        fileObservable = this.fileService.getParentSubFolderFilesName(parentFolderName, parentSubFolderName, this.userEmail);
     } else {
-        // Load files from the parent folder
-        console.log('Loading files from parent folder...');
-        fileObservable = this.fileService.getFiles(parentFolderName, this.userEmail);
+      console.error('Missing parentFolderName or userEmail.');
     }
+  }
 
-    fileObservable.subscribe(
-        (files: any[]) => {
-            this.files = files;
-            this.noFilesMessage = this.files.length === 0 ? 'No files found.' : '';
-            console.log('Fetched files:', this.files);
-        },
-        (error: any) => {
-            console.error('Error loading files:', error);
-            this.toastr.error('Failed to load files.');
-        }
-    );
-}
-  
 
-loadFolders(parentFolderName: string, parentSubFolderName?: string, parentSubChildFoldername?: string,  parentSubFinalChildFoldername?: string): void {
-  console.log('Loading folders for:', parentFolderName, 'Subfolder:', parentSubFolderName, 'SubChildFolder:', parentSubChildFoldername, 'SubFinalChildFolder:', parentSubFinalChildFoldername);
+  loadFiles(parentFolderName: string, parentSubFolderName?: string, parentSubChildFoldername?: string, parentSubFinalChildFoldername?: any): void {
+    console.log('Loading files for:', parentFolderName, 'Subfolder:', parentSubFolderName, 'parentSubChildFoldername:',parentSubChildFoldername, 'parentSubFinalChildFoldername:',parentSubFinalChildFoldername);
     console.log('User Email:', this.userEmail);
-    // if (parentSubFinalChildFoldername && parentSubChildFoldername && parentSubFolderName) {
-    //   // Load files from the sub-final child folder
-    //   console.log('Loading files from sub-final child folder...');
-    //   this.folderService.parentSubFinalChildFolderName(
-    //     parentFolderName,
-    //     parentSubFolderName,
-    //     parentSubChildFoldername,
-    //     this.userEmail
-    // ).subscribe(
-    //     (folders: any[]) => {
-    //         this.parentSubChildFolders = folders;
-    //         console.log('Fetched final child folders:', this.parentSubChildFolders);
-    //         if (this.parentSubChildFolders.length === 0) {
-    //             console.log('No folders found, displaying message or placeholder');
-    //             this.parentSubChildFolders = []; // Ensure array is defined
-    //         }
-    //     },
-    //     (error: any) => {
-    //         console.error('Error loading final child folders:', error);
-    //         this.toastr.error('Failed to load final child folders.');
-    //     }
-    // ); } else
-     if (parentSubChildFoldername && parentSubFolderName) {
-      // Load files from the sub-child folder
-      console.log('Loading files from sub-child folder...');
-      this.folderService.parentSubFinalChildFolderName(
-        parentFolderName,
-        parentSubFolderName,
-        parentSubChildFoldername,
-        this.userEmail
-    ).subscribe(
-        (folders: any[]) => {
-            this.parentSubChildFolders = folders;
-            console.log('Fetched final child folders:', this.parentSubChildFolders);
-            if (this.parentSubChildFolders.length === 0) {
-                console.log('No folders found, displaying message or placeholder');
-                this.parentSubChildFolders = []; // Ensure array is defined
+
+    if (this.parentFolderName && this.userEmail) {
+
+      // Check if a subfolder name is provided
+      if(parentSubFinalChildFoldername && parentSubChildFoldername && parentSubFolderName ){
+        console.log('Loading files from subChildfolder...');
+        this.fileService.getParentFinalSubChildFolderFilesName(parentFolderName, parentSubFolderName, parentSubChildFoldername,parentSubFinalChildFoldername, this.userEmail)
+          .subscribe(
+            (files: any[]) => {
+              this.files = files || []; 
+              this.noFilesMessage = this.files.length === 0 ? 'No files found.' : '';
+              console.log('Fetched files:', this.files);
+            },
+            (error: any) => {
+              console.error('Error loading files from subfolder:', error);
+              this.toastr.error('Failed to load files from subfolder.');
             }
-        },
-        (error: any) => {
-            console.error('Error loading final child folders:', error);
-            this.toastr.error('Failed to load final child folders.');
-        }
-    ); } else if (parentSubFolderName) {
-      // Load files from the subfolder
-      console.log('Loading files from subfolder...');
-      this.folderService.parentSubChildFolderNames(
-        parentFolderName,
-        parentSubFolderName,
-        this.userEmail
-    ).subscribe(
-        (folders: any[]) => {
-            this.parentSubFolders = folders;
-            console.log('Fetched sub-child folders:', this.parentSubFolders);
-            if (this.parentSubFolders.length === 0) {
-                console.log('No folders found, displaying message or placeholder');
-                this.parentSubFolders = []; // Ensure array is defined
+          );
+      }else if(parentSubChildFoldername && parentSubFolderName ){
+        console.log('Loading files from subChildfolder...');
+        this.fileService.getParentSubChildFolderFilesName(parentFolderName, parentSubFolderName, parentSubChildFoldername, this.userEmail)
+          .subscribe(
+            (files: any[]) => {
+              this.files = files || [];
+              this.noFilesMessage = this.files.length === 0 ? 'No files found.' : '';
+              console.log('Fetched files:', this.files);
+            },
+            (error: any) => {
+              console.error('Error loading files from subfolder:', error);
+              this.toastr.error('Failed to load files from subfolder.');
             }
-        },
-        (error: any) => {
-            console.error('Error loading sub-child folders:', error);
-            this.toastr.error('Failed to load sub-child folders.');
-        }
-    ); } else {
-      // Load files from the parent folder
-      console.log('Loading files from parent folder...');
-      // Fetching parent folders
-      this.folderService.getParentSubFolder(
-        parentFolderName,
-        this.userEmail
-    ).subscribe(
-        (folders: any[]) => {
-            this.parentFolders = folders;
-            console.log('Fetched parent folders:', this.parentFolders);
-            if (this.parentFolders.length === 0) {
-                console.log('No folders found, displaying message or placeholder');
-                this.parentFolders = []; // Ensure array is defined
+          );
+      }else if (parentSubFolderName) {
+        console.log('Loading files from subfolder...');
+        this.fileService.getParentSubFolderFilesName(parentFolderName, parentSubFolderName, this.userEmail)
+          .subscribe(
+            (files: any[]) => {
+              this.files = files;
+              this.noFilesMessage = this.files.length === 0 ? 'No files found.' : '';
+              console.log('Fetched files:', this.files);
+            },
+            (error: any) => {
+              console.error('Error loading files from subfolder:', error);
+              this.toastr.error('Failed to load files from subfolder.');
             }
-        },
-        (error: any) => {
-            console.error('Error loading parent folders:', error);
-            this.toastr.error('Failed to load parent folders.');
-        }
-    ); 
+          );
+      } else {
+        console.log('Loading files from parent folder...');
+        this.fileService.getFiles(this.parentFolderName, this.userEmail)
+          .subscribe(
+            (files) => {
+              this.files = files;
+              this.noFilesMessage = this.files.length === 0 ? 'No files found.' : '';
+              console.log('Fetched files:', this.files);
+            },
+            (error) => {
+              console.error('Error loading files from parent folder:', error);
+              this.toastr.error('Failed to load files from parent folder.');
+            }
+          );
+      }
+    } else {
+      console.error('Missing folderName or userEmail.');
+    }
+  }
+
+loadFolders(
+  parentFolderName: string, 
+  parentSubFolderName?: string, 
+  parentSubChildFoldername?: string,  
+  parentSubFinalChildFoldername?: string
+): void {
+  console.log(
+    'Loading folders for:', 
+    'Parent Folder:', parentFolderName, 
+    'Parent Subfolder:', parentSubFolderName, 
+    'Parent SubChild Folder:', parentSubChildFoldername, 
+    'Parent SubFinalChild Folder:', parentSubFinalChildFoldername
+  );
+  console.log('User Email:', this.userEmail);
+
+  if (parentSubChildFoldername && parentSubFinalChildFoldername) {
+    console.log('in last folder no more nested folders');
+   
+  }else if (parentSubChildFoldername && parentSubFolderName) {
+    console.log('Loading files from sub- Final child folder...');
+    this.folderService.parentSubFinalChildFolderName(
+      parentFolderName,
+      parentSubFolderName,
+      parentSubChildFoldername,
+      this.userEmail
+    ).subscribe(
+      (folders: any[]) => {
+        this.parentSubChildFolders = folders;
+        console.log('Fetched final child folders:', this.parentSubFinalChildFoldername);
+      },
+      (error: any) => {
+        console.error('Error loading final child folders:', error);
+        this.toastr.error('Failed to load final child folders.');
+      }
+    );
+  }else if (parentFolderName && parentSubFolderName) {
+    console.log('Loading files from sub-child folder...');
+    this.folderService.parentSubChildFolderNames(
+      parentFolderName,
+      parentSubFolderName,
+      this.userEmail
+    ).subscribe(
+      (folders: any[]) => {
+        this.parentSubFolders = folders;
+        console.log('Fetched final child folders:', this.parentSubChildFolders);
+      },
+      (error: any) => {
+        console.error('Error loading final child folders:', error);
+        this.toastr.error('Failed to load final child folders.');
+      }
+    );
+  } else if (parentFolderName) {
+    console.log('Loading files from subfolder...');
+    this.folderService.getParentSubFolder(
+      parentFolderName,
+      this.userEmail
+    ).subscribe(
+      (folders: any[]) => {
+        this.parentFolders = folders;
+        console.log('Fetched sub-child folders:', this.parentSubFolders);
+      },
+      (error: any) => {
+        console.error('Error loading sub-child folders:', error);
+        this.toastr.error('Failed to load sub-child folders.');
+      }
+    );
   }
 }
+
 
 createFolder(): void {
   if (this.createFolderForm.invalid) {
@@ -459,7 +520,9 @@ createFolder(): void {
 
 
   selectFolder(folder: Folder): void {
-    if (folder.parentFolderName && folder.parentSubFolderName && folder.parentSubChildFolderName) {
+    if (folder.parentFolderName && folder.parentSubFolderName && folder.parentSubChildFolderName && folder.parentSubFinalChildFolderName) {
+      this.router.navigate([folder.parentFolderName, folder.parentSubFolderName, folder.parentSubChildFolderName,folder.parentSubFinalChildFolderName, 'files']);
+    }else if (folder.parentFolderName && folder.parentSubFolderName && folder.parentSubChildFolderName) {
       this.router.navigate([folder.parentFolderName, folder.parentSubFolderName, folder.parentSubChildFolderName, 'files']);
     } else if (folder.parentFolderName && folder.parentSubFolderName) {
       this.router.navigate([folder.parentFolderName, folder.parentSubFolderName, 'files']);

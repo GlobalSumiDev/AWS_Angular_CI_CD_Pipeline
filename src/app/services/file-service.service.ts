@@ -9,17 +9,13 @@ import { Folder } from '../pages/model/folder.model';
   providedIn: 'root'
 })
 export class FileService {
-  private apiUrl = 'http://localhost:8081/api/files';
-  private folderUrl ='http://localhost:8081/api/folders';
+  private apiUrl = 'http://globalsumi1.us-east-1.elasticbeanstalk.com/api/files';
+  // private folderUrl = 'http://localhost:8081/api/folders';
 
-  constructor(private http: HttpClient) {}
-
-  
-
- 
+  constructor(private http: HttpClient) { }
 
 
-  uploadParentFile( parentFolderName: string, userEmail: string, file: File): Observable<any> {
+  uploadParentFile(parentFolderName: string, userEmail: string, file: File): Observable<any> {
     const formData = new FormData();
     formData.append('parentFolderName', parentFolderName);
     formData.append('userEmail', userEmail);
@@ -29,7 +25,7 @@ export class FileService {
       .pipe(catchError(this.handleError));
   }
 
-  uploadParentSubChildFile( parentFolderName: string, parentSubFolderName:string,file: File, userEmail: string ): Observable<any> {
+  uploadParentSubChildFile(parentFolderName: string, parentSubFolderName: string, file: File, userEmail: string): Observable<any> {
     const formData = new FormData();
     formData.append('parentFolderName', parentFolderName);
     formData.append('parentSubFolderName', parentSubFolderName);
@@ -40,7 +36,7 @@ export class FileService {
       .pipe(catchError(this.handleError));
   }
 
-  uploadParentSubFolderFile( parentFolderName: string, parentSubFolderName:string, parentSubChildFoldername:string, file: File, userEmail: string ): Observable<any> {
+  uploadParentSubFolderFile(parentFolderName: string, parentSubFolderName: string, parentSubChildFoldername: string, file: File, userEmail: string): Observable<any> {
     const formData = new FormData();
     formData.append('parentFolderName', parentFolderName);
     formData.append('parentSubFolderName', parentSubFolderName);
@@ -52,7 +48,7 @@ export class FileService {
       .pipe(catchError(this.handleError));
   }
 
-  uploadParentSubFinalChildFile( parentFolderName: string, parentSubFolderName:string, parentSubChildFoldername:string, parentSubFinalChildFoldername:string, file: File, userEmail: string ): Observable<any> {
+  uploadParentSubFinalChildFile(parentFolderName: string, parentSubFolderName: string, parentSubChildFoldername: string, parentSubFinalChildFoldername: string, file: File, userEmail: string): Observable<any> {
     const formData = new FormData();
     formData.append('parentFolderName', parentFolderName);
     formData.append('parentSubFolderName', parentSubFolderName);
@@ -70,22 +66,19 @@ export class FileService {
       .set('fileName', encodeURIComponent(fileName))
       .set('parentFolderName', parentFolderName)
       .set('userEmail', userEmail);
-  
+
     return this.http.delete<void>(`${this.apiUrl}/delete`, { params })
       .pipe(catchError(this.handleError));
   }
-  
+
 
   downloadFile(fileName: string, parentFolderName: string, userEmail: string): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/download/${fileName}?parentFolderName=${parentFolderName}&userEmail=${userEmail}`, {
-      responseType: 'blob' 
+      responseType: 'blob'
     }).pipe(
       catchError(this.handleError)
     );
   }
-
-
-  
 
 
 
@@ -94,22 +87,26 @@ export class FileService {
     return throwError('Something went wrong; please try again later.');
   }
 
+
+
+  getFiles(parentFolderName: string, userEmail: any): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/parentFolder?parentFolderName=${parentFolderName}&userEmail=${userEmail}`)
+      .pipe(catchError(this.handleError));
+  }
   getParentSubFolderFilesName(parentFolderName: string, parentSubFolderName: string, userEmail: any) {
     return this.http.get<any[]>(`${this.apiUrl}/parentSubFolder/Files?parentFolderName=${parentFolderName}&parentSubFolderName=${parentSubFolderName}&userEmail=${userEmail}`)
-    .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError));
   }
-
-  getParentSubFinalChildFolderFilesName(parentFolderName: string, parentSubFolderName: string,parentSubChildFoldername:string, parentSubFinalChildFoldername:string,userEmail: any) {
+  getParentSubFinalChildFolderFilesName(parentFolderName: string, parentSubFolderName: string, parentSubChildFoldername: string, parentSubFinalChildFoldername: string, userEmail: any) {
     return this.http.get<any[]>(`${this.apiUrl}/parentSubChildFinalFolder?parentFolderName=${parentFolderName}&parentSubFolderName=${parentSubFolderName}&parentSubChildFoldername=${parentSubChildFoldername}&parentSubFinalChildFoldername=${parentSubFinalChildFoldername}&userEmail=${userEmail}`)
-    .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError));
   }
-
-  getParentSubChildFolderFilesName(parentFolderName: string, parentSubFolderName: string,parentSubChildFoldername:string, userEmail: string): Observable<any[]> {
+  getParentSubChildFolderFilesName(parentFolderName: string, parentSubFolderName: string, parentSubChildFoldername: string, userEmail: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/parentSubChildFolder/Files?parentFolderName=${parentFolderName}&parentSubFolderName=${parentSubFolderName}&parentSubChildFoldername=${parentSubChildFoldername}&userEmail=${userEmail}`)
-        .pipe(catchError(this.handleError));
-}
-getFiles(parentFolderName: string, userEmail: any): Observable<any[]> {
-  return this.http.get<any[]>(`${this.apiUrl}/parentFolder?parentFolderName=${parentFolderName}&userEmail=${userEmail}`)
-    .pipe(catchError(this.handleError));
-}
+      .pipe(catchError(this.handleError));
+  }
+  getParentFinalSubChildFolderFilesName(parentFolderName: string, parentSubFolderName: string, parentSubChildFoldername: string, parentSubFinalChildFoldername: string, userEmail: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/parentFinalSubChildFolder/Files?parentFolderName=${parentFolderName}&parentSubFolderName=${parentSubFolderName}&parentSubChildFoldername=${parentSubChildFoldername}&parentSubFinalChildFoldername=${parentSubFinalChildFoldername}&userEmail=${userEmail}`)
+      .pipe(catchError(this.handleError));
+  }
 }

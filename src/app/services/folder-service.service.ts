@@ -11,7 +11,7 @@ export class FolderService {
   
  
   
-  private apiUrl = 'http://localhost:8081/api/folders'; // Ensure this matches your backend API
+  private apiUrl = 'http://globalsumi1.us-east-1.elasticbeanstalk.com/api/folders'; 
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +19,25 @@ export class FolderService {
   getFolders(userEmail: string): Observable<Folder[]> {
     return this.http.get<Folder[]>(`${this.apiUrl}/byUserEmail?userEmail=${userEmail}`);
   }
+
+  
+  getParentSubFolder(parentFolderName: string, userEmail: string): Observable<Folder[]> {
+    return this.http.get<Folder[]>(`${this.apiUrl}/${parentFolderName}/files?userEmail=${userEmail}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  parentSubChildFolderNames(parentFolderName: string, parentSubFolderName: string, userEmail: string) {
+    const url = `${this.apiUrl}/${parentFolderName}/${parentSubFolderName}/ParentSubFolders?userEmail=${userEmail}`;
+    console.log('Constructed URL:', url); // Debugging line
+    return this.http.get<Folder[]>(url);
+  }
+
+    parentSubFinalChildFolderName(parentFolderName: string, parentSubFolderName: string,parentSubChildFolderName:string, userEmail: string){
+    const url = `${this.apiUrl}/${parentFolderName}/${parentSubFolderName}/${parentSubChildFolderName}/ParentSubChildFolders?userEmail=${userEmail}`;
+    console.log('Constructed URL:', url); // Debugging line
+    return this.http.get<Folder[]>(url);
+  }
+
 
   createFolder(parentFolderName: string, userEmail: string): Observable<string> {
     const url = `${this.apiUrl}/createParentFolder`;
@@ -59,17 +78,6 @@ export class FolderService {
   }
 
 
-  getParentSubFolder(parentFolderName: string, userEmail: string): Observable<Folder[]> {
-    return this.http.get<Folder[]>(`${this.apiUrl}/${parentFolderName}/files?userEmail=${userEmail}`)
-      .pipe(catchError(this.handleError));
-  }
-
-  parentSubChildFolderNames(parentFolderName: string, parentSubFolderName: string, userEmail: string) {
-    const url = `${this.apiUrl}/${parentFolderName}/${parentSubFolderName}/ParentSubFolders?userEmail=${userEmail}`;
-    console.log('Constructed URL:', url); // Debugging line
-    return this.http.get<Folder[]>(url);
-  }
-
   
   deleteParentSubFolder(parentFolderName: string, parentSubFolderName: string, userEmail: string){
     const params = new HttpParams()
@@ -86,11 +94,7 @@ export class FolderService {
     return this.http.delete<any>(`${this.apiUrl}/${parentFolderName}/${parentSubFolderName}/deleteParentSubChildFolder`, { params });
   }
 
-  parentSubFinalChildFolderName(parentFolderName: string, parentSubFolderName: string,parentSubChildFolderName:string, userEmail: string){
-    const url = `${this.apiUrl}/${parentFolderName}/${parentSubFolderName}/${parentSubChildFolderName}/ParentSubChildFolders?userEmail=${userEmail}`;
-    console.log('Constructed URL:', url); // Debugging line
-    return this.http.get<Folder[]>(url);
-  }
+
 
   createParentSubFinalChildFolderName(parentFolderName: string, parentSubFolderName: string, parentSubChildFolderName:string, parentSubFinalChildFolderName:string, userEmail: string): Observable<any>{
     return this.http.post<any>(`${this.apiUrl}/${parentFolderName}/${parentSubFolderName}/${parentSubChildFolderName}/createParentSubFinalChildFolder`, null, {

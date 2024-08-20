@@ -81,6 +81,7 @@ export const routes: Routes = [
   { path: ':ParentFolderName/files', component: FilesComponent, canActivate: [authGuard] },  
   { path: ':ParentFolderName/:ParentSubFolderName/files', component: FilesComponent, canActivate: [authGuard] },
   { path: ':ParentFolderName/:ParentSubFolderName/:ParentSubChildFolderName/files', component: FilesComponent, canActivate: [authGuard] },
+  { path: ':ParentFolderName/:ParentSubFolderName/:ParentSubChildFolderName/:ParentSubFinalChildFolderName/files', component: FilesComponent, canActivate: [authGuard] },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -10,8 +10,11 @@
 
           <!-- Header -->
           <h2 class="mb-4 text-primary">
-            Upload Files in 
-            {{ parentSubChildFoldername ? parentSubChildFoldername : (parentSubFolderName ? parentSubFolderName : parentFolderName) }}
+            Upload Files in
+            {{ parentSubFinalChildFoldername ? parentSubFinalChildFoldername :
+               parentSubChildFoldername ? parentSubChildFoldername :
+               parentSubFolderName ? parentSubFolderName :
+               parentFolderName }}
           </h2>
           <!-- File Upload Form -->
           <div class="input-group mb-4">
@@ -22,16 +25,15 @@
           </div>
 
           <!-- Create Folder Form -->
-          <form [formGroup]="createFolderForm" (ngSubmit)="createFolder()" class="mb-5">
+          <form *ngIf="!parentSubFinalChildFoldername" [formGroup]="createFolderForm" (ngSubmit)="createFolder()" class="mb-5">
             <div class="input-group mb-3">
               <input formControlName="folderName" type="text" class="form-control" placeholder="New Folder Name"
                 style="border-radius: 5px 0 0 5px;">
-              <button type="submit" class="btn btn-success" style="border-radius: 0 5px 5px 0;">Create Folder</button>
+              <button type="submit" class="btn btn-success" style="border-radius: 0 5px 5px 0;">Create Folder </button>
             </div>
           </form>
 
-          <!-- Display Files -->
-          <div *ngIf="files.length > 0">
+          <div *ngIf="files && files.length > 0">
             <h3 class="mb-3 text-secondary">Uploaded Files</h3>
             <table class="table table-hover">
               <thead class="table-dark">
@@ -57,12 +59,12 @@
               </tbody>
             </table>
           </div>
-
-          <div *ngIf="files.length === 0" class="text-center">
+          <div *ngIf="files && files.length === 0" class="text-center">
             <p class="text-muted">No files uploaded yet.</p>
           </div>
+
           <div class="folder-list">
-            <h3 class="mb-4">Your Folders</h3>
+            <h3 class="mb-4" *ngIf="!parentSubFinalChildFoldername">Your Folders</h3>
             <div class="d-flex flex-wrap gap-3">
               <div class="folder-item" *ngFor="let folder of parentFolders">
                 <h2><strong>{{ folder.parentSubFolderName }}</strong></h2>
@@ -91,17 +93,17 @@
           </div>
 
           <div class="d-flex flex-wrap gap-3">
-          <div class="folder-item" *ngFor="let folder of parentSubChildFolders">
-            <h2><strong>{{ folder.parentSubFinalChildFolderName }}</strong></h2>
-            <img src="./assets/images/Folder_Image.png" alt="Folder" class="folder-icon me-2"
-              [ngStyle]="{'width': '280px', 'height': '240px'}" (click)="selectFolder(folder)" />
-            <div class="ms-auto mt-2">
-              <button type="button" class="btn btn-danger btn-sm" (click)="deleteFolder(folder)">
-                Delete
-              </button>
+            <div class="folder-item" *ngFor="let folder of parentSubChildFolders">
+              <h2><strong>{{ folder.parentSubFinalChildFolderName }}</strong></h2>
+              <img src="./assets/images/Folder_Image.png" alt="Folder" class="folder-icon me-2"
+                [ngStyle]="{'width': '280px', 'height': '240px'}" (click)="selectFolder(folder)" />
+              <div class="ms-auto mt-2">
+                <button type="button" class="btn btn-danger btn-sm" (click)="deleteFolder(folder)">
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
-         </div>
         </div>
       </div>
     </div>
