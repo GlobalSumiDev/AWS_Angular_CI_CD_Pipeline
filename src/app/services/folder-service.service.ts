@@ -11,7 +11,7 @@ export class FolderService {
   
  
   
-  private apiUrl = 'http://globalsumi1.us-east-1.elasticbeanstalk.com/api/folders'; 
+  private apiUrl = 'https://app.globalsumi.com/api/folders'; 
 
   constructor(private http: HttpClient) { }
 

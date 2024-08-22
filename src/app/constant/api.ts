@@ -4,4 +4,4 @@ export const contactAPI ="https://v29cmocos5.execute-api.us-east-1.amazonaws.com
 
 // export const registrationAPI ="http://localhost:8080/register"
 
-export const registrationAPI ="http://globalsumi14-env-login-registration.eba-58pkzjqf.us-east-1.elasticbeanstalk.com/register"
+export const registrationAPI ="https://api.globalsumi.com/register"

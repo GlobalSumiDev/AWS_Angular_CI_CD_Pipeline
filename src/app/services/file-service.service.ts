@@ -9,7 +9,7 @@ import { Folder } from '../pages/model/folder.model';
   providedIn: 'root'
 })
 export class FileService {
-  private apiUrl = 'http://globalsumi1.us-east-1.elasticbeanstalk.com/api/files';
+  private apiUrl = 'https://app.globalsumi.com/api/files';
   // private folderUrl = 'http://localhost:8081/api/folders';
 
   constructor(private http: HttpClient) { }

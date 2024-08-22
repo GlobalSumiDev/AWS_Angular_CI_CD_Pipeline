@@ -9,7 +9,7 @@ import { tap } from 'rxjs/operators';
 export class AuthenticationService {
 
   //private apiUrl = 'http://localhost:8080/authenticate';  
-  private apiUrl = 'http://globalsumi14-env-login-registration.eba-58pkzjqf.us-east-1.elasticbeanstalk.com/authenticate';
+  private apiUrl = 'https://api.globalsumi.com/authenticate';
   private tokenKey = 'authToken';
   private currentUserEmailKey = 'currentUserEmail';
 
