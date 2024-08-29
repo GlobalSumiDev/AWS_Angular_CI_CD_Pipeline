@@ -9,8 +9,8 @@ import { Folder } from '../pages/model/folder.model';
   providedIn: 'root'
 })
 export class FileService {
-  //private apiUrl = 'https://app.globalsumi.com/api/files';
-  private apiUrl = 'http://localhost:8081/api/files';
+  private apiUrl = 'https://app.globalsumi.com/api/files';
+  //private apiUrl = 'http://localhost:8081/api/files';
 
   constructor(private http: HttpClient) { }
 
