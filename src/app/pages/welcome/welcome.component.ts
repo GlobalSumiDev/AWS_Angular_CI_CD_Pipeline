@@ -7,6 +7,8 @@ import { FolderService } from '../../services/folder-service.service';
 import { FilesComponent } from '../files/files.component';
 import { CommonModule } from '@angular/common';
 import { Folder } from '../model/folder.model';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -28,7 +30,9 @@ export class WelcomeComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private authService: AuthenticationService,
-    private folderService: FolderService
+    private dialog: MatDialog,
+    private folderService: FolderService,
+    
   ) { }
 
   ngOnInit(): void {
@@ -63,7 +67,16 @@ export class WelcomeComponent implements OnInit {
   createFolder(): void {
     // Check if the form is invalid
     if (this.createFolderForm.invalid) {
-      console.log('Form is invalid');
+      if (!this.createFolderForm.value.folderName.trim()) {
+        this.toastr.warning('Please enter a folder name.', 'Warning', {
+          progressBar: true,
+          closeButton: true,
+          positionClass: 'toast-top-right',
+          timeOut: 5000
+        });
+      } else {
+        console.log('Form is invalid');
+      }
       return;
     }
 
@@ -100,6 +113,10 @@ export class WelcomeComponent implements OnInit {
   deleteFolder(folder: any): void {
     const parentFolderName = folder.parentFolderName;
 
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
     if (this.userEmail && parentFolderName) {
       this.folderService.deleteFolder(parentFolderName, this.userEmail).subscribe(
         (response: any) => {
@@ -115,4 +132,6 @@ export class WelcomeComponent implements OnInit {
       );
     }
   }
+});
+ }
 }

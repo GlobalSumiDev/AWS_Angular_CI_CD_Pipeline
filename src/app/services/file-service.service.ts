@@ -9,8 +9,8 @@ import { Folder } from '../pages/model/folder.model';
   providedIn: 'root'
 })
 export class FileService {
-  private apiUrl = 'https://app.globalsumi.com/api/files';
-  // private folderUrl = 'http://localhost:8081/api/folders';
+  //private apiUrl = 'https://app.globalsumi.com/api/files';
+  private apiUrl = 'http://localhost:8081/api/files';
 
   constructor(private http: HttpClient) { }
 
@@ -109,4 +109,45 @@ export class FileService {
     return this.http.get<any[]>(`${this.apiUrl}/parentFinalSubChildFolder/Files?parentFolderName=${parentFolderName}&parentSubFolderName=${parentSubFolderName}&parentSubChildFoldername=${parentSubChildFoldername}&parentSubFinalChildFoldername=${parentSubFinalChildFoldername}&userEmail=${userEmail}`)
       .pipe(catchError(this.handleError));
   }
+
+
+
+
+  deleteFileInParentSubFolder(fileName: string, parentFolderName: string, parentSubFolderName: string, userEmail: string): Observable<void> {
+    const params = new HttpParams()
+      .set('fileName', encodeURIComponent(fileName))
+      .set('parentFolderName', parentFolderName)
+      .set('parentSubFolderName', parentSubFolderName)
+      .set('userEmail', userEmail);
+
+    return this.http.delete<void>(`${this.apiUrl}/parentSubFolder/delete`, { params })
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteFileInParentSubChildFolder(fileName: string, parentFolderName: string, parentSubFolderName: string, parentSubChildFolderName:string, userEmail: string): Observable<void> {
+    const params = new HttpParams()
+      .set('fileName', encodeURIComponent(fileName))
+      .set('parentFolderName', parentFolderName)
+      .set('parentSubFolderName', parentSubFolderName)
+      .set('parentSubChildFolderName',parentSubChildFolderName)
+      .set('userEmail', userEmail);
+
+    return this.http.delete<void>(`${this.apiUrl}/parentSubChildFolder/delete`, { params })
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteFileInParentSubFinalChildFolder(fileName: string, parentFolderName: string, parentSubFolderName: string, parentSubChildFolderName:string, parentSubFinalChildFoldername:string, userEmail: string): Observable<void> {
+    const params = new HttpParams()
+      .set('fileName', encodeURIComponent(fileName))
+      .set('parentFolderName', parentFolderName)
+      .set('parentSubFolderName', parentSubFolderName)
+      .set('parentSubChildFolderName',parentSubChildFolderName)
+      .set('parentSubFinalChildFoldername', parentSubFinalChildFoldername)
+      .set('userEmail', userEmail);
+
+    return this.http.delete<void>(`${this.apiUrl}/parentFinalSubChildFolder/delete`, { params })
+      .pipe(catchError(this.handleError));
+  }
+
+
 }

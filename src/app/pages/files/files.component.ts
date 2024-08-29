@@ -1,22 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../../services/authentication.service';
 import { FileService } from '../../services/file-service.service';
 import { CommonModule } from '@angular/common';
 import { Folder } from '../model/folder.model';
 import { FolderService } from '../../services/folder-service.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-files',
-  templateUrl: './files.component.html',
   standalone: true,
+  templateUrl: './files.component.html',
   styleUrls: ['./files.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    MatDialogModule // Import MatDialogModule for using Angular Material Dialog
+  ]
 })
 export class FilesComponent implements OnInit {
-
   parentFolderName: string | any;
   parentSubFolderName: string | any;
   createFolderForm: FormGroup | any;
@@ -31,7 +37,6 @@ export class FilesComponent implements OnInit {
   parentFolders: Folder[] = [];
   parentSubFolders: Folder[] = [];
   parentSubChildFolders: Folder[] = [];
-  
 
   constructor(
     private fileService: FileService,
@@ -41,6 +46,7 @@ export class FilesComponent implements OnInit {
     private authService: AuthenticationService,
     private fb: FormBuilder,
     private folderService: FolderService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -87,7 +93,14 @@ export class FilesComponent implements OnInit {
 
   uploadFile(): void {
     if (!this.selectedFile || !this.parentFolderName || !this.userEmail) {
-      this.toastr.error('Please provide all required information.');
+      if (!this.createFolderForm.value.folderName.trim()) {
+        this.toastr.warning('No file is choosen. Please choose a file', 'Warning', {
+          progressBar: true,
+          closeButton: true,
+          positionClass: 'toast-top-right',
+          timeOut: 5000
+        });
+      } 
       return;
     }
   
@@ -192,34 +205,115 @@ export class FilesComponent implements OnInit {
 
   deleteFile(fileName: string): void {
     console.log('Deleting file:', fileName); // Debugging line to check fileName
-    if (this.parentFolderName && this.userEmail) {
-      this.fileService.deleteFile(fileName, this.parentFolderName, this.userEmail)
-        .subscribe(
-          (response: any) => {
-            this.toastr.success('File deleted successfully!');
-            console.log('File deleted, loading files...');
-            // Re-load files after deletion
-            if (this.parentSubFinalChildFoldername) {
-              this.loadFiles(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername, this.parentSubFinalChildFoldername);
-              console.log('File Deletion for parentFolder: calling load files',this.parentSubFinalChildFoldername, this.parentSubChildFoldername );
-           } else if (this.parentSubChildFoldername) {
-              this.loadFiles(this.parentFolderName, this.parentSubFolderName, this.parentSubChildFoldername);
-              console.log('File Deletion for parent Sub Folder: calling load Sub files', this.parentSubChildFoldername );
-            } else if (this.parentSubFolderName) {
-              this.loadFiles(this.parentFolderName, this.parentSubFolderName);
-            }else {
-              this.loadFiles(this.parentFolderName);
+
+    // Open confirmation dialog
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result) {
+            if (this.parentFolderName && this.userEmail) {
+                // Log the folder structure for debugging
+                console.log('Attempting to delete file in folder structure:');
+                console.log('parentFolderName:', this.parentFolderName);
+                console.log('parentSubFolderName:', this.parentSubFolderName);
+                console.log('parentSubChildFolderName:', this.parentSubChildFoldername);
+                console.log('parentSubFinalChildFolderName:', this.parentSubFinalChildFoldername);
+
+                // Call the appropriate service method to delete the file based on folder hierarchy
+                if (this.parentSubFinalChildFoldername) {
+                    console.log('Attempting to delete file from parent sub-final child folder');
+                    this.fileService.deleteFileInParentSubFinalChildFolder(
+                        fileName,
+                        this.parentFolderName,
+                        this.parentSubFolderName,
+                        this.parentSubChildFoldername,
+                        this.parentSubFinalChildFoldername,
+                        this.userEmail
+                    ).subscribe(
+                        (response: any) => {
+                             {
+                                this.toastr.success(`File '${fileName}' deleted successfully!`);
+                                this.loadFiles(
+                                    this.parentFolderName,
+                                    this.parentSubFolderName,
+                                    this.parentSubChildFoldername,
+                                    this.parentSubFinalChildFoldername
+                                );
+                            } 
+                        },
+                        (error) => {
+                            this.toastr.error('Failed to delete file.');
+                            console.error('Error deleting file:', error);
+                        }
+                    );
+                } else if (this.parentSubChildFoldername) {
+                    console.log('Attempting to delete file from parent sub-child folder');
+                    this.fileService.deleteFileInParentSubChildFolder(
+                        fileName,
+                        this.parentFolderName,
+                        this.parentSubFolderName,
+                        this.parentSubChildFoldername,
+                        this.userEmail
+                    ).subscribe(
+                        (response: any) => {
+                                this.toastr.success(`File '${fileName}' deleted successfully!`);
+                                this.loadFiles(
+                                    this.parentFolderName,
+                                    this.parentSubFolderName,
+                                    this.parentSubChildFoldername
+                                );
+                        },
+                        (error) => {
+                            this.toastr.error('Failed to delete file.');
+                            console.error('Error deleting file:', error);
+                        }
+                    );
+                } else if (this.parentSubFolderName) {
+                    console.log('Attempting to delete file from parent subfolder');
+                    this.fileService.deleteFileInParentSubFolder(
+                        fileName, this.parentFolderName,
+                      this.parentSubFolderName,
+                        this.userEmail
+                    ).subscribe(
+                        (response: any) => {
+                            
+                                this.toastr.success(`File '${fileName}' deleted successfully!`);
+                                this.loadFiles(this.parentFolderName, this.parentSubFolderName);
+                             
+                        },
+                        (error) => {
+                            this.toastr.error('Failed to delete file.');
+                            console.error('Error deleting file:', error);
+                        }
+                    );
+                } else {
+                    console.log('Attempting to delete file from root folder');
+                    this.fileService.deleteFile(
+                        fileName,
+                        this.parentFolderName,
+                        this.userEmail
+                    ).subscribe(
+                        (response: any) => {
+                             
+                                this.toastr.success(`File '${fileName}' deleted successfully!`);
+                                this.loadFiles(this.parentFolderName);
+                            
+                        },
+                        (error) => {
+                            this.toastr.error('Failed to delete file.');
+                            console.error('Error deleting file:', error);
+                        }
+                    );
+                }
+            } else {
+                console.error('Missing parentFolderName or userEmail.');
+                this.toastr.error('Cannot delete file: Missing parent folder name or user email.');
             }
-          },
-          (error) => {
-            this.toastr.error('Failed to delete file.');
-            console.error('Error:', error);
-          }
-        );
-    } else {
-      console.error('Missing parentFolderName or userEmail.');
-    }
-  }
+        } else {
+            console.log('File deletion canceled by user.');
+        }
+    });
+}
 
 
   loadFiles(parentFolderName: string, parentSubFolderName?: string, parentSubChildFoldername?: string, parentSubFinalChildFoldername?: any): void {
@@ -363,7 +457,14 @@ loadFolders(
 
 createFolder(): void {
   if (this.createFolderForm.invalid) {
-      console.log('Form is invalid');
+    if (!this.createFolderForm.value.folderName.trim()) {
+      this.toastr.warning('Please enter a folder name.', 'Warning', {
+        progressBar: true,
+        closeButton: true,
+        positionClass: 'toast-top-right',
+        timeOut: 5000
+      });
+    } 
       return;
   }
 
@@ -422,100 +523,101 @@ createFolder(): void {
     const parentSubFolderName = folder.parentSubFolderName;
     const parentSubChildFolderName = folder.parentSubChildFolderName;
     const parentSubFinalChildFolderName = folder.parentSubFinalChildFolderName;
-
+  
     console.log('Deleting folder:');
     console.log('parentFolderName:', this.parentFolderName);
     console.log('parentSubFolderName:', parentSubFolderName);
     console.log('parentSubChildFolderName:', parentSubChildFolderName);
     console.log('parentSubFinalChildFolderName:', parentSubFinalChildFolderName);
-
-    if (this.userEmail && this.parentFolderName) {
-      if (parentSubFinalChildFolderName) {
-        // Case: Deleting a Parent Sub-Final Child Folder
-        console.log('Attempting to delete parent sub-final child folder');
-
-        this.folderService.deleteParentSubFinalChildFolder(
-          this.parentFolderName,
-          parentSubFolderName,
-          parentSubChildFolderName,
-          parentSubFinalChildFolderName,
-          this.userEmail
-        ).subscribe(
-          (response: any) => {
-            console.log('Response after deleting parent sub-final child folder:', response.message);
-            if (response.message === 'Folder deleted successfully!') {
-              // Remove the folder from the list after successful deletion
-              this.parentSubChildFolders = this.parentSubChildFolders.filter(f => f.parentSubFinalChildFolderName !== parentSubFinalChildFolderName);
-              this.toastr.success(`Parent sub-final child folder '${parentSubFinalChildFolderName}' deleted successfully!`);
-              this.loadFolders(this.parentFolderName, parentSubFolderName, parentSubChildFolderName);
-            } else {
-              this.toastr.error('Failed to delete parent sub-final child folder.');
-            }
-          },
-          (error: any) => {
-            console.error('Error deleting parent sub-final child folder:', error);
-            this.toastr.error('Failed to delete parent sub-final child folder.');
+  
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+  
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        if (this.userEmail && this.parentFolderName) {
+          if (parentSubFinalChildFolderName) {
+            console.log('Attempting to delete parent sub-final child folder');
+            this.folderService.deleteParentSubFinalChildFolder(
+              this.parentFolderName,
+              parentSubFolderName,
+              parentSubChildFolderName,
+              parentSubFinalChildFolderName,
+              this.userEmail
+            ).subscribe(
+              (response: any) => {
+                console.log('Response after deleting parent sub-final child folder:', response.message);
+                if (response.message === 'Folder deleted successfully!') {
+                  this.parentSubChildFolders = this.parentSubChildFolders.filter(f => f.parentSubFinalChildFolderName !== parentSubFinalChildFolderName);
+                  this.toastr.success(`Parent sub-final child folder '${parentSubFinalChildFolderName}' deleted successfully!`);
+                  this.loadFolders(this.parentFolderName, parentSubFolderName, parentSubChildFolderName);
+                } else {
+                  this.toastr.error('Failed to delete parent sub-final child folder.');
+                }
+              },
+              (error: any) => {
+                console.error('Error deleting parent sub-final child folder:', error);
+                this.toastr.error('Failed to delete parent sub-final child folder.');
+              }
+            );
+          } else if (parentSubChildFolderName) {
+            console.log('Attempting to delete parent sub-child folder');
+            this.folderService.deleteParentSubChildFolder(
+              this.parentFolderName,
+              parentSubFolderName,
+              parentSubChildFolderName,
+              this.userEmail
+            ).subscribe(
+              (response: any) => {
+                console.log('Response after deleting parent sub-child folder:', response.message);
+                if (response.message === 'Folder deleted successfully!') {
+                  this.parentSubFolders = this.parentSubFolders.filter(f => f.parentSubChildFolderName !== parentSubChildFolderName);
+                  this.toastr.success(`Parent sub-child folder '${parentSubChildFolderName}' deleted successfully!`);
+                  this.loadFolders(this.parentFolderName, parentSubFolderName);
+                } else {
+                  this.toastr.error('Failed to delete parent sub-child folder.');
+                }
+              },
+              (error: any) => {
+                console.error('Error deleting parent sub-child folder:', error);
+                this.toastr.error('Failed to delete parent sub-child folder.');
+              }
+            );
+          } else if (parentSubFolderName) {
+            console.log('Attempting to delete parent subfolder');
+            this.folderService.deleteParentSubFolder(
+              this.parentFolderName,
+              parentSubFolderName,
+              this.userEmail
+            ).subscribe(
+              (response: any) => {
+                console.log('Response after deleting parent subfolder:', response.message);
+                if (response.message === 'Folder deleted successfully!') {
+                  this.parentFolders = this.parentFolders.filter(f => f.parentSubFolderName !== parentSubFolderName);
+                  this.toastr.success(`Parent subfolder '${parentSubFolderName}' deleted successfully!`);
+                  this.loadFolders(this.parentFolderName);
+                } else {
+                  this.toastr.error('Failed to delete parent subfolder.');
+                }
+              },
+              (error: any) => {
+                console.error('Error deleting parent subfolder:', error);
+                this.toastr.error('Failed to delete parent subfolder.');
+              }
+            );
+          } else {
+            console.log('No valid folder name to delete');
+            this.toastr.error('No valid folder name provided for deletion.');
           }
-        );
-      } else if (parentSubChildFolderName) {
-        // Case: Deleting a Parent Sub-Child Folder
-        console.log('Attempting to delete parent sub-child folder');
-
-        this.folderService.deleteParentSubChildFolder(
-          this.parentFolderName,
-          parentSubFolderName,
-          parentSubChildFolderName,
-          this.userEmail
-        ).subscribe(
-          (response: any) => {
-            console.log('Response after deleting parent sub-child folder:', response.message);
-            if (response.message === 'Folder deleted successfully!') {
-              // Remove the folder from the list after successful deletion
-              this.parentSubFolders = this.parentSubFolders.filter(f => f.parentSubChildFolderName !== parentSubChildFolderName);
-              this.toastr.success(`Parent sub-child folder '${parentSubChildFolderName}' deleted successfully!`);
-              this.loadFolders(this.parentFolderName, parentSubFolderName);
-            } else {
-              this.toastr.error('Failed to delete parent sub-child folder.');
-            }
-          },
-          (error: any) => {
-            console.error('Error deleting parent sub-child folder:', error);
-            this.toastr.error('Failed to delete parent sub-child folder.');
-          }
-        );
-      } else if (parentSubFolderName) {
-        // Case: Deleting a Parent Subfolder
-        console.log('Attempting to delete parent subfolder');
-
-        this.folderService.deleteParentSubFolder(
-          this.parentFolderName,
-          parentSubFolderName,
-          this.userEmail
-        ).subscribe(
-          (response: any) => {
-            console.log('Response after deleting parent subfolder:', response.message);
-            if (response.message === 'Folder deleted successfully!') {
-              // Remove the folder from the list after successful deletion
-              this.parentFolders = this.parentFolders.filter(f => f.parentSubFolderName !== parentSubFolderName);
-              this.toastr.success(`Parent subfolder '${parentSubFolderName}' deleted successfully!`);
-              this.loadFolders(this.parentFolderName);
-            } else {
-              this.toastr.error('Failed to delete parent subfolder.');
-            }
-          },
-          (error: any) => {
-            console.error('Error deleting parent subfolder:', error);
-            this.toastr.error('Failed to delete parent subfolder.');
-          }
-        );
+        } else {
+          console.log('Missing user email or parent folder name');
+          this.toastr.error('Cannot delete folder: Missing user email or parent folder name.');
+        }
       } else {
-        console.log('No valid folder name to delete');
+        console.log('Folder deletion canceled by user.');
       }
-    } else {
-      console.log('Missing user email or parent folder name');
-    }
+    });
   }
-
+  
 
 
 

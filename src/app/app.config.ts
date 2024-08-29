@@ -1,11 +1,11 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import {} from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
       preventDuplicates: true
     }),
     provideAnimations(),
-    importProvidersFrom(HttpClientModule),
-    importProvidersFrom(ReactiveFormsModule),
+    provideHttpClient(),  // Use provideHttpClient() instead of importProvidersFrom(HttpClientModule)
+    ReactiveFormsModule, provideAnimationsAsync(),
   ]
 };
