@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "myapp": {
+    "sumitech": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/myapp",
+            "outputPath": "dist/sumitech",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -30,13 +30,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "@angular/material/prebuilt-themes/cyan-orange.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/toastr/build/toastr.css",
+              "src/styles.scss"
             ],
             "scripts": [
-            "node_modules/jquery/dist/jquery.min.js",
-            "node_modules/@popperjs/core/dist/umd/popper.min.js",
-            "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/slick-carousel/slick/slick.min.js",
+              "./src/assets/js/app.js"
             ],
             "server": "src/main.server.ts",
             "prerender": true,
@@ -49,13 +52,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "50mb",
-                  "maximumError": "50mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "40kb",
-                  "maximumError": "40kb"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ],
               "outputHashing": "all"
@@ -72,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "myapp:build:production"
+              "buildTarget": "sumitech:build:production"
             },
             "development": {
-              "buildTarget": "myapp:build:development"
+              "buildTarget": "sumitech:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "myapp:build"
+            "buildTarget": "sumitech:build"
           }
         },
         "test": {
@@ -100,6 +103,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/cyan-orange.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -109,6 +113,6 @@
     }
   },
   "cli": {
-    "analytics": "c22d3e76-4ae8-4aee-a8fe-0a34fb27d4ca"
+    "analytics": false
   }
 }

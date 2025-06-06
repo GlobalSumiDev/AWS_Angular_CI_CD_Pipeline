@@ -1,0 +1,68 @@
+<app-innerbanner [subTitle]="'Analytics'"
+  [heading]="'Deliver customized business intelligence solutions to translate data into actionable insights tailored to your specific needs.'"
+  btnText="let's talk" [backgroundUrl]="'analytics.png'"></app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-up">
+          <img class="blogImg blog-banner" src="./assets/images/services/analytics.png" alt="analytics" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <h2>New era of visualizations</h2>
+          <p>Data permeates every aspect. For enterprises, establishing a data framework is essential to expedite
+            informed decision-making, curtail business costs, and devise innovative next-generation offerings for
+            customers. Whether predicting future growth, thwarting fraud, assessing business effectiveness, or enhancing
+            customer acquisition, having data business analytics is imperative for driving decision-making processes.
+            Introducing accurate data visualizations heralds a new era of business opportunities for the future.
+
+          </p>
+          <ul class="listStyle mt-3">
+            <li>Predictive analytics </li>
+            <li>Prescriptive analytics </li>
+            <li>Diagnostic analytics </li>
+            <li>Descriptive analytics </li>
+            <li>Data visualizations</li>
+            <li>Data cleansing</li>
+            <li>Statistical analytics </li>
+            <li>Business intelligence</li>
+          </ul>
+
+        </div>
+        <div class="content" data-aos="fade-up">
+          <h2>We create a data soul for you.</h2>
+          <p>At Global Sumi, we understand the critical stages of the data lifecycle – gathering, altering, and
+            amalgamating. Recognizing the pivotal role of data visualization in informed decision-making, we provide
+            tailored business intelligence tools to transform data into meaningful insights aligned with your business
+            vision.
+          </p>
+          <div>
+            <div class="logos">
+              <ul class="p-0 services-logo">
+                <ngx-slick-carousel #slickModal="slick-carousel" [config]="autoLoopingLogo" class="">
+                <li ngxSlickItem><img src="./assets/images/services/logo/tableau.png" /></li>
+                <li><img src="./assets/images/services/logo/power-bi.png" /></li>
+                <li><img src="./assets/images/services/logo/qlik-q.png" /></li>
+                <li><img src="./assets/images/services/logo/microstrategy.png" /></li>
+                <li><img src="./assets/images/services/logo/sap.png" /></li>
+                <li> <img src="./assets/images/services/logo/quicksight.png" /></li>
+                <li><img src="./assets/images/services/logo/ibm-cognos.png" /></li>
+                <li><img src="./assets/images/services/logo/thoughtspot.png" /></li>
+                </ngx-slick-carousel>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

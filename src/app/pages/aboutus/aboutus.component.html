@@ -1,0 +1,186 @@
+<app-innerbanner [subTitle]="'About Us'" [heading]="'We pride ourselves on being customer-centric in all our endeavor'"
+  btnText="let's talk" [backgroundUrl]="'about-us.png'"></app-innerbanner>
+<section class="large-cap">
+  <div class="container">
+    <div class="row col-change">
+      <div class="col-lg-6 col-sm-12">
+        <div class="about-img " data-aos="fade-right">
+          <figure class="text-center">
+            <img src="./assets/images/about-img.png" alt="about-img" />
+          </figure>
+          <div class="it-ex">
+            <h4>2 Decades</h4>
+            <p>IT Business Experience</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-sm-12">
+        <div data-aos="fade-left">
+          <h6 class="sub-title">About Us</h6>
+          <h2>Building trust and credibility over two decades
+          </h2>
+          <p>
+            We pride ourselves on being customer-centric in all our endeavors. We prioritize our
+            customers' needs, ensuring that their satisfaction remains at the forefront of
+            everything we do. We believe in building trust through integrity and accountability,
+            fostering long-lasting connections with our valued clientele.
+          </p>
+          <div class="about-blog">
+            <div class="blog-items">
+              <div class="">
+                <img src="./assets/images/Homepage/icons/transparency.png" alt="transparency" />
+              </div>
+              <div class="item-cont">
+                <h6>Transparency</h6>
+                <p>Your needs are our priority, and transparency is our pledge.
+                </p>
+              </div>
+            </div>
+            <div class="blog-items">
+              <div class="">
+                <img src="./assets/images/Homepage/icons/global-presence.png" alt="setting" />
+              </div>
+              <div class="item-cont">
+                <h6>Global Presence</h6>
+                <p>we stand at the forefront of delivering excellence across borders.</p>
+              </div>
+            </div>
+          </div>
+          <p>Our extensive reach enables us to cater to various markets, embracing diversity and
+            leveraging our expertise to meet the unique needs of our customer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="large-cap sliverBg rowRevers">
+  <div class="container">
+    <div class="ourTeam">
+      <div class="content" data-aos="fade-up">
+        <h6 class="sub-title">We Make Connections</h6>
+        <h2 class="p-0">Discover Trust Team and Our Experts</h2>
+      </div>
+      <ngx-slick-carousel #slickModal="slick-carousel" [config]="teamSlider" class="teamList" data-aos="fade-up">
+        <div class="teamCard" ngxSlickItem>
+          <img src="./assets/images/team/geetha.png" alt="geetha" />
+          <div class="details">
+            <h6 class="name">Geetha Palani</h6>
+            <p class="role">President</p>
+          </div>
+        </div>
+        <div class="teamCard">
+          <img src="./assets/images/team/srini.png" alt="srini" />
+          <div class="details">
+            <h6 class="name">Srinivasan Balasubramanian</h6>
+            <p class="role"> Vice-President</p>
+          </div>
+        </div>
+        <div class="teamCard">
+          <img src="./assets/images/team/akila.png" alt="Akila" />
+          <div class="details">
+            <h6 class="name">Akila Krishna</h6>
+            <p class="role"> HR Director</p>
+          </div>
+        </div>
+        <div class="teamCard">
+          <img src="./assets/images/team/clement.png" alt="clement" />
+          <div class="details">
+            <h6 class="name">Clement Carey</h6>
+            <p class="role">VP People and Culture</p>
+          </div>
+        </div>
+      </ngx-slick-carousel>
+    </div>
+  </div>
+</section>
+<section class="large-cap" id="peoplewecare">
+  <div class="container">
+    <div class="industries-item">
+      <ul>
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="peopleConfig">
+          <li ngxSlickItem>
+            <div class="row col-change">
+              <div class="col-lg-6 col-sm-12">
+                <div class="row double-img-blog">
+                  <div class="col-6">
+                    <div class="text-center" data-aos="fade-up">
+                      <figure>
+                        <img class="mt-130" src="./assets/images/team/naveena.png" alt="naveena" />
+                      </figure>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="text-center" data-aos="fade-up">
+                      <figure>
+                        <img src="./assets/images/team/naveena-a.png" alt="about-img" />
+                      </figure>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-sm-12 d-flex align-items-center">
+                <div data-aos="fade-left">
+                  <h6 class="sub-title">PEOPLE WE CARE </h6>
+                  <h2>Naveena Davay
+                  </h2>
+                  <p>
+                    My journey with Global Sumi Technologies began in 2020. The support from the entire GST team has
+                    been
+                    unwavering, offering realistic guidance and encouragement through every career transition. GST has
+                    been
+                    instrumental in helping me shape my goals and develop a roadmap to achieve them. The flexibility
+                    granted
+                    has enabled me to strike a harmonious balance between work and personal life—an aspect I deeply
+                    value.
+
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="row col-change">
+              <div class="col-lg-6 col-sm-12">
+                <div class="row double-img-blog">
+                  <div class="col-6">
+                    <div class="text-center">
+                      <figure>
+                        <img class="mt-130" src="./assets/images/team/srinirama.png" alt="srinirama" />
+                      </figure>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="text-center">
+                      <figure>
+                        <img src="./assets/images/team/srinirama-a.png" alt="about-img" />
+                      </figure>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-sm-12 d-flex align-items-center">
+                <div>
+                  <h6 class="sub-title">PEOPLE WE CARE</h6>
+                  <h2>Srinivasan Ramakrishnan</h2>
+                  <p>
+                    The company's genuine concern for our personal situations and aspirations is commendable, allowing
+                    each
+                    of us to harness our full potential. As I reflect on the growth I've experienced each passing year
+                    at
+                    GST, I am convinced of the significance of investing in a workplace that nurtures continual growth.
+                    The
+                    supportive environment and multitude of opportunities make it an ideal space for me to thrive both
+                    professionally and personally.
+
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ngx-slick-carousel>
+      </ul>
+
+    </div>
+  </div>
+</section>

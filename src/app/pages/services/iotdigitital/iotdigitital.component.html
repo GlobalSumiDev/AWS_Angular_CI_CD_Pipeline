@@ -1,0 +1,76 @@
+<!-- <div class="innerBanner bank product" style="background-image: url('./assets/images/banner-images/IoT.png');">
+  <h1 data-aos="fade-up"></h1>
+</div> -->
+<app-innerbanner [subTitle]="'Internet Of Things Digital Experience'"
+  [heading]="'Deliver scalable, secure, and efficient IoT solutions tailored to your specific needs.'"
+  btnText="let's talk" [backgroundUrl]="'IoT.png'"></app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-up">
+          <img class="blogImg blog-banner" src="./assets/images/services/iot-digital-experience.png"
+            alt="iot-digital-experience" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <h2>A inter-connected world</h2>
+          <p>In the world of IoT (Internet of Things), communications and connections embody the pulse of our
+            increasingly interlinked globe. IoT facilitates seamless device communication, enabling data sharing and
+            intelligent collaboration. From smart homes to industrial automation, IoT's transformative power lies in
+            establishing robust connections that foster real-time information exchange. This interconnectedness
+            revolutionizes efficiency, enabling remote monitoring, predictive maintenance, and streamlined processes,
+            empowering businesses and individuals for smarter, responsive environments.
+          </p>
+
+          <ul class="listStyle mt-3">
+            <li>IoT interoperability</li>
+            <li>Intelligence products </li>
+            <li>Connected Experience </li>
+            <li>Cyber security in IOT </li>
+            <li>Digital human factor engineering</li>
+            <li>Multi-cloud utilization</li>
+            <li>Low-code/No-code offerings </li>
+            <li>Digital ecosystem</li>
+          </ul>
+
+        </div>
+        <div class="content" data-aos="fade-up">
+          <h2>We revolutinize internet of things (IOT)</h2>
+          <p>
+
+            We stand out as a trusted partner with a proven track record of success in the dynamic IoT landscape. Our
+            expertise, innovation-driven approach, and unwavering commitment to reliability make us the ideal choice.
+            With a deep understanding of device interconnectivity, we deliver scalable, secure, and efficient IoT
+            solutions tailored to your specific needs. By leveraging cutting-edge technologies, we ensure that our IoT
+            systems yield tangible results. Our focus on robust data privacy, seamless integration, and interoperability
+            guarantees a dependable IoT infrastructure. When you choose us, you're selecting a dedicated team that
+            prioritizes understanding your business needs, delivering, and unlocking the full potential of IoT solutions
+            for your success.
+          </p>
+
+          <div class="row">
+            <div class="col-md-6">
+              <figure>
+                <img class="blogImg blog-banner" src="./assets/images/services/img/iot-2.png" alt="IOT" />
+              </figure>
+            </div>
+            <div class="col-md-6">
+              <figure>
+                <img class="blogImg blog-banner" src="./assets/images/services/img/iot-3.png" alt="IOT" />
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

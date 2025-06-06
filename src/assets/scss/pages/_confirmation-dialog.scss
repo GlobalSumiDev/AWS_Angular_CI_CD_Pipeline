@@ -1,0 +1,47 @@
+/* Style the dialog box */
+.mat-dialog-container {
+    background-color: white; /* Set background to white */
+    width: 400px; /* Adjust the width of the dialog */
+    padding: 20px; /* Add some padding */
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: slight shadow */
+  }
+  
+  /* Style the title */
+  h1.mat-dialog-title {
+    color: black; /* Set the text color to black */
+    font-size: 24px; /* Increase the font size */
+    margin-bottom: 20px; /* Add some space below the title */
+    text-align: center; /* Center the title text */
+  }
+  
+  /* Style the content */
+  .mat-dialog-content {
+    color: black; /* Set the text color to black */
+    font-size: 16px; /* Adjust the font size */
+    text-align: center; /* Center the content text */
+    margin-bottom: 20px; /* Add space below the content */
+  }
+  
+  /* Style the buttons */
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: space-between; /* Space buttons apart */
+    margin-top: 20px; /* Add some space above the buttons */
+  }
+  
+  button.mat-button {
+    color: white; /* Set text color to white */
+    padding: 10px 20px; /* Add padding to buttons */
+    border-radius: 4px; /* Optional: rounded corners */
+  }
+  
+  /* Specific button colors */
+  button.mat-button:first-child { /* No button */
+    background-color: red; /* Red background */
+  }
+  
+  button.mat-button:last-child { /* Yes button */
+    background-color: green; /* Green background */
+  }
+  

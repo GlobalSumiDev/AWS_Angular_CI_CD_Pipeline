@@ -1,0 +1,158 @@
+<header class="header" id="header" (scroll)="onScroll($event)" [ngClass]="{'sticky': isSticky}">
+  <div class="menu-group" [ngClass]="{'menu-active': isActive}">
+    <a routerLink="/" class="brand">
+      <img src="./assets/images/logo.png" alt="logo" />
+    </a>
+    <div class="burger" id="burger" (click)="addClass()">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </div>
+    <span class="overlay"></span>
+    <nav class="navbar" id="navbar">
+      <div class="close-icon" (click)="closeMenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FF0000"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+        </svg>
+      </div>
+      <ul class="menu" id="menu">
+        <li class="menu-item" (click)="closeMenu()"><a routerLink="/" routerLinkActive="menu-active"
+            [routerLinkActiveOptions]="{ exact: true }" class="menu-link">Home</a></li>
+        <li class="menu-item" (click)="closeMenu()"><a routerLink="/aboutus" routerLinkActive="menu-active"
+            class="menu-link">About Us</a>
+        </li>
+        <li class="menu-item menu-dropdown" [ngClass]="{'active': industries}" (click)="openIndustries()">
+          <span class="menu-link" data-toggle="submenu">Industries<i class="bx bx-chevron-down"></i></span>
+          <ul class="submenu industries-submenu">
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/bankfinancial"
+                routerLinkActive="sub-menu-active" class="submenu-link">Banking and
+                Financials
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/insurance" routerLinkActive="sub-menu-active"
+                class="submenu-link">Insurance
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/healthcare"
+                routerLinkActive="sub-menu-active" class="submenu-link">Healthcare &
+                Life Sciences
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/manufacturing"
+                routerLinkActive="sub-menu-active" class="submenu-link">Manufacturing
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/retail" routerLinkActive="sub-menu-active"
+                class="submenu-link">Retail
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/energyutilities"
+                routerLinkActive="sub-menu-active" class="submenu-link">Energy
+                and Utilities
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/mobility-hospitality"
+                routerLinkActive="sub-menu-active" class="submenu-link">Mobility and
+                Hospitality
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/media-communications"
+                routerLinkActive="sub-menu-active" class="submenu-link">Media and
+                Communications
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item menu-dropdown" [ngClass]="{'active': services}" (click)="openServices()">
+          <span class="menu-link" data-toggle="submenu">Services<i class="bx bx-chevron-down"></i></span>
+          <ul class="submenu ser-submenu">
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/ai-ml" routerLinkActive="sub-menu-active"
+                class="submenu-link">AI
+                and ML
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/cloud-services"
+                routerLinkActive="sub-menu-active" class="submenu-link">Cloud
+                Services
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/iot-digitital-experience"
+                routerLinkActive="sub-menu-active" class="submenu-link">IOT
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/data-science"
+                routerLinkActive="sub-menu-active" class="submenu-link">Data Science
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/analytics" routerLinkActive="sub-menu-active"
+                class="submenu-link">Analytics
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/etl-data-quality"
+                routerLinkActive="sub-menu-active" class="submenu-link">ETL and
+                Data Quality
+              </a>
+            </li>
+
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/fullstackdevlopment"
+                routerLinkActive="sub-menu-active" class="submenu-link">Full Stack
+                Development
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/cyber-security"
+                routerLinkActive="sub-menu-active" class="submenu-link">Cyber Security
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/automation-quality"
+                routerLinkActive="sub-menu-active" class="submenu-link">Automation and Quality
+                Engineering
+              </a>
+            </li>
+
+          </ul>
+        </li>
+        <li class="menu-item menu-dropdown" [ngClass]="{'active': products}" (click)="openProducts()">
+          <a class="menu-link" routerLink="#" data-toggle="submenu">Products<i class="bx bx-chevron-down"></i></a>
+          <ul class="submenu">
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/medtech" routerLinkActive="sub-menu-active"
+                class="submenu-link">MedTechMD</a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/searchblox"
+                routerLinkActive="sub-menu-active" class="submenu-link">Searchblox
+              </a>
+            </li>
+            <li class="submenu-item" (click)="closeMenu()"><a routerLink="/irms" routerLinkActive="sub-menu-active"
+                class="submenu-link">IRMS</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item" (click)="closeMenu()"><a routerLink="/careers" routerLinkActive="menu-active"
+            class="menu-link">Careers </a>
+        </li>
+        <li class="menu-item" (click)="closeMenu()"><a routerLink="/contactus" routerLinkActive="menu-active"
+            class="menu-link">Contact us</a>
+        </li>
+        <!-- <li class="menu-item btn-group" (click)="closeMenu()">
+          <a routerLink="/login" routerLinkActive="menu-active" class="menu-link">Login
+            <span class="right-arrow">
+              <img src="./assets/images/button-arrow.png" alt="button-arrow" />
+            </span>
+          </a>
+        </li>  -->
+        <li class="menu-item btn-group">
+          <a routerLink="/login" routerLinkActive="menu-active" class="menu-link" *ngIf="!isLoggedIn">Login
+            <span class="right-arrow">
+              <img src="./assets/images/button-arrow.png" alt="button-arrow" />
+            </span>
+          </a>
+          <a class="menu-link" (click)="logout()" *ngIf="isLoggedIn">Logout</a>
+        </li>
+       
+        
+      </ul>
+    </nav>
+  </div>
+</header>

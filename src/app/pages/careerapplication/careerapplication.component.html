@@ -1,0 +1,152 @@
+<app-innerbanner [subTitle]="'Apply Now'" [heading]="'Apply Now'" btnText="let's talk"
+  [backgroundUrl]="'apply-now.png'">
+</app-innerbanner>
+<section class="large-cap">
+  <div class="address">
+    <div class="container">
+      <div class="text-center address-cont" data-aos="slide-up">
+        <h2>Let's discuss your opportunity </h2>
+        <p>Our platform is tailor-made for developers, providing a powerful and easy-to-use solution.
+          With our tools, you can streamline your process.
+        </p>
+      </div>
+      <div class="submit-form">
+        <div class="contact-form contact-page">
+          <form (ngSubmit)="onSubmit()" [formGroup]="applicationForm">
+            <div class="home-form">
+              <div class="form-grp">
+                <div class="form-item" [ngClass]="{ 'is-invalid': submitted && formControls.firstName.errors }">
+                  <input type="text" id="firstname" formControlName="firstName" autocomplete="off" required />
+                  <label for="firstname">First Name*</label>
+                  <div *ngIf="submitted && formControls.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.firstName.errors.required">First name is required</div>
+                  </div>
+                </div>
+                <div class="form-item" [ngClass]="{ 'is-invalid': submitted && formControls.lastName.errors }">
+                  <input type="text" id="lastname" formControlName="lastName" autocomplete="off" required />
+                  <label for="lastname">Last Name*</label>
+                  <div *ngIf="submitted && formControls.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.lastName.errors.required">last name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-grp">
+                <div class="form-item" [ngClass]="{ 'is-invalid': submitted && formControls.email.errors }">
+                  <input type="email" id="email" formControlName="email" autocomplete="off" required />
+                  <label for="email">Email*</label>
+                  <div *ngIf="submitted && formControls.email.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.email.errors.required">Email is required</div>
+                    <div *ngIf="formControls.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+                <div class="form-item" [ngClass]="{ 'is-invalid': submitted && formControls.phoneNumber.errors }">
+                  <input type="number" id="phonenumber" formControlName="phoneNumber" autocomplete="off" required />
+                  <label for="phonenumber">Phone Number*</label>
+                  <div *ngIf="submitted && formControls.phoneNumber.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.phoneNumber.errors.required">Phone number is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-grp">
+                <div class="form-item" [ngClass]="{ 'is-invalid': submitted && formControls.company.errors }">
+                  <input type="text" id="company" formControlName="company" autocomplete="off" required />
+                  <label for="company">Company*</label>
+                  <div *ngIf="submitted && formControls.company.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.company.errors.required">Company name is required</div>
+                  </div>
+                </div>
+                <div class="form-item" [ngClass]="{ 'is-invalid': submitted && formControls.role.errors }">
+                  <input type="text" id="role" formControlName="role" autocomplete="off" required />
+                  <label for="role">Role*</label>
+                  <div *ngIf="submitted && formControls.role.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.role.errors.required">Role is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-grp">
+                <div class="form-item file-input"
+                  [ngClass]="{ 'is-invalid': submitted && formControls.cv.errors }">
+                  <input type="file" id="uploadCV" formControlName="cv" (change)="displayFileNameCV($event)"
+                    autocomplete="off" accept=".doc, .docx, .pdf" required />
+                  <label for="uploadCV">Upload your CV*</label>
+                  <div id="fileNameContainer" *ngIf="selectedCVFile">{{ selectedCVFile.name }}</div>
+                  <div *ngIf="submitted && formControls.cv.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.cv.errors.required">CV is required</div>
+                  </div>
+                </div>
+                <div class="form-item file-input"
+                  [ngClass]="{ 'is-invalid': submitted && formControls.coverLetter.errors }">
+                  <input type="file" id="fileInput" formControlName="coverLetter" autocomplete="off"
+                    (change)="displayselectedCoverLatter($event)" accept=".doc, .docx, .pdf" required />
+                  <label for="fileInput">Upload your Cover Letter*</label>
+                  <div id="fileNameContainer" *ngIf="selectedCoverLatter">{{ selectedCoverLatter.name }}</div>
+                  <div *ngIf="submitted && formControls.coverLetter.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.coverLetter.errors.required">Cover letter is required</div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="form-item" [ngClass]="{ 'is-invalid': submitted && formControls.message.errors }">
+                  <textarea id="message" formControlName="message" autocomplete="off" required></textarea>
+                  <label for="message">Message</label>
+                  <div *ngIf="submitted && formControls.message.errors" class="invalid-feedback">
+                    <div *ngIf="formControls.message.errors.required">Message is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center pt-2">
+                <div class="btn-group mt-0">
+                  <button type="submit">
+                    <span>SUBMIT APPLICATION
+                      <span class="right-arrow">
+                        <img src="./assets/images/button-arrow.png" alt="button-arrow" />
+                      </span>
+                    </span>
+                  </button>
+                  <span *ngIf="loading" class="loading-indicator">
+                    <div class="loader-btn"></div>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="large-cap sliverBg">
+  <div class="container">
+    <div class="row col-change">
+      <div class="col-lg-6 col-sm-12">
+        <div class="text-center">
+          <figure>
+            <img src="./assets/images/about-img.png" alt="about-img" />
+          </figure>
+        </div>
+      </div>
+      <div class="col-lg-6 col-sm-12 d-flex align-items-center">
+        <div class="mob-align">
+          <h6 class="sub-title">Work With Us</h6>
+          <h2>Why Choose Us?</h2>
+          <p>Our platform is tailor-made for developers, providing a
+            powerful and easy-to-use solution. With our tools, you can
+            streamline your development process and achieve better
+            outcomes. We offer a range of features that enable you to
+            create robust applications quickly and efficiently.
+          </p>
+          <p class="mt-2">Cloud-based solutions have allowed businesses to shift their
+            operations to remote, allowing employees to work with
+            an internet connection.
+          </p>
+          <div class="btn-group">
+            <a href="#" target="_top">Read More
+              <span class="right-arrow">
+                <img src="./assets/images/button-arrow.png" alt="button-arrow" /> </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

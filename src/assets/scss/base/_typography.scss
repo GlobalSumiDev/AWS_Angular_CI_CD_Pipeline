@@ -1,0 +1,32 @@
+$ff-base: 'Montserrat', sans-serif;
+
+/* heading font sizes */
+$fs-h1: 60px;
+$fs-h2: 40px;
+$fs-h3: 30px;
+$fs-h4: 24px;
+$fs-h5: 20px;
+// $fs-h6: 20px;
+
+/* base font size - applied at body / html level */
+$fs-base: 16px;
+
+/* Smaller than heading font sizes */
+$fs-medium :26px;
+$fs-normal: 18px;
+$fs-milli: 14px;
+$fs-micro: 12px;
+$fs-nano:  8px;
+
+/*Line hight*/
+$lh-base: 21px;
+$lh-h5: 28px;
+
+/*Font Weights*/
+$thin: 100;
+$light: 300;
+$regular: 400;
+$medium: 500;
+$semibold: 600;
+$bold: 700;
+$extrabold: 800;

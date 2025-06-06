@@ -1,0 +1,74 @@
+<app-innerbanner [subTitle]="'Healthcare'"
+  [heading]="'Our expertise in data analytics, telemedicine, and digital health solutions, we\'re driving the future of healthcare'"
+  btnText="let's talk" [backgroundUrl]="'healthcare.png'"></app-innerbanner>
+<section class="large-cap mobile-filter" [ngClass]="{'open-filter': isActive}">
+  <div class="filter-icon">
+    <div class="filter-toggle" (click)="toggleSidebar()">
+      <button class="filter-open"><i class="bx bx-chevron-right"></i></button>
+      <button class="filter-close"><i class="bx bx-chevron-left"></i></button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="blogSection">
+      <div class="blogMenu" data-aos="fade-up">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="blogContainer">
+        <figure class="mb-4" data-aos="fade-up">
+          <img class="blogImg blog-banner" src="./assets/images/industries/healthcare.png" alt="healthcare" />
+        </figure>
+        <div class="content" data-aos="fade-up">
+          <h2>Innovating for a healthier tomorrow
+          </h2>
+          <p>We are at the forefront of healthcare technology and innovation, spearheading
+            transformative solutions. By developing robust and secure platforms, fostering
+            interoperability, and implementing AI-driven systems, we empower healthcare providers to
+            deliver exceptional patient care. Through our expertise in data analytics, telemedicine,
+            and digital health solutions, we're driving the future of healthcare, revolutionizing
+            how technology can predict, enhance and personalize patient experience.
+          </p>
+          <ul class="listStyle mt-3">
+            <li>Health informatics</li>
+            <li>Precision medicine</li>
+            <li>HL7 toFHIR</li>
+            <li>Clinical reimagning using data and AI</li>
+            <li>Digital transformation from legacy</li>
+            <li>Healthcare IOT</li>
+            <li>Data sharing using block chain</li>
+            <li>cyber security and intelligent approach</li>
+          </ul>
+        </div>
+        <div class="content" data-aos="fade-up">
+          <h2>Transforming Healthcare: The Internet of Medical Things(IOMT)
+          </h2>
+          <p>The Internet of Medical Things (IoMT) stands as a transformative force in healthcare,
+            leveraging interconnected devices to revolutionize patient care, diagnostics, and
+            healthcare delivery. Here we explore the pivotal role of IoMT, elucidating the problems
+            it addresses, its innovative approach, and the myriad solutions it offers to reshape the
+            healthcare ecosystem.
+          </p>
+          <div class="row">
+            <div class="col-md-6" data-aos="fade-right">
+              <figure class="image-blog">
+                <img class="blogImg blog-banner" src="./assets/images/industries/img/healthcare-2.png" alt="ai-&-ml" />
+              </figure>
+            </div>
+            <div class="col-md-6" data-aos="fade-left">
+              <figure>
+                <img class="blogImg blog-banner" src="./assets/images/industries/img/healthcare-3.png" alt="ai-&-ml" />
+              </figure>
+            </div>
+          </div>
+          <div class="mt-3">
+            <div class="btn-group">
+              <a [routerLink]="['/healthcare/whitepaper']" fragment="start">Read more
+                <span class="right-arrow">
+                  <img src="./assets/images/button-arrow.png" alt="button-arrow" /> </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

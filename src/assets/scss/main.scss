@@ -1,0 +1,34 @@
+@import './base/reset';
+@import './base/font';
+@import './base/typography';
+@import './base/variables';
+@import './base/mixin';
+
+@import './themes/theme';
+
+// Component
+@import './components/buttons';
+
+//Layout
+@import './layout/header';
+@import './layout/footer';
+@import './layout/innerBanner';
+@import './layout/blog';
+
+// Pages
+@import './pages/home';
+@import './pages/product';
+@import './pages/about';
+@import './pages/careers';
+@import './pages/registration';
+@import './pages/login';
+@import './pages/welcome';
+@import './pages/file';
+@import './pages/contact';
+@import './pages/confirmation-dialog';
+
+
+
+@import './vendors/slick';
+@import './vendors/slick-theme';
+@import './vendors/modal-video';

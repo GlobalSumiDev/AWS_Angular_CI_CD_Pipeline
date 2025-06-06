@@ -1,0 +1,20 @@
+.bg-image {
+  padding-top: 70px; /* Adjust padding as needed for your header height */
+  overflow-y: scroll;
+}
+.form-and-image-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns of equal width */
+}
+
+.col-md-10.col-lg-6.col-xl-5 { /* Form element class */
+  grid-column: 1; /* Place form in first column */
+}
+
+.col-md-10.col-lg-6.col-xl-7 { /* Image element class */
+  grid-column: 2; /* Place image in second column */
+  align-self: center; /* Vertically center image within column */
+}
+.input-group input {
+  flex: 1 1 0px; /* Set equal width for both inputs */
+}

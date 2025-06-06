@@ -1,0 +1,15 @@
+<div class="innerBanner product" [style.backgroundImage]="'url(./assets/images/banner-images/' + backgroundUrl + ')'">
+  <div class="container">
+    <div class="inner-content" data-aos="fade-up">
+      <h6 class="sub-title">{{ subTitle }}</h6>
+      <div class="bot-line"></div>
+      <h1>{{ heading }}</h1>
+      <div class="btn-group">
+        <a [routerLink]="['/contactus']" fragment="letstalk">{{btnText}}
+          <span class="right-arrow">
+            <img src="./assets/images/button-arrow.png" alt="button-arrow" /> </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

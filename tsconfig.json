@@ -3,6 +3,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
+    "types": [
+      "jquery",
+      "intl-tel-input"
+    ],
+    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,

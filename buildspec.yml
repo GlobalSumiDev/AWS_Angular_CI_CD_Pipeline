@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing dependencies...
+      - yum update -y
+      - yum install -y --allowerasing gcc make openssl jq
+      - npm install -g @angular/cli
+      - npm install
+
+  build:
+    commands:
+      - echo Building Angular application...
+      - ng build --configuration=production
+
+  post_build:
+    commands:
+      - echo Copying build artifacts...
+      - if [ -d "dist/sumitech/browser" ]; then cp -r dist/sumitech/browser/* $CODEBUILD_SRC_DIR/; else echo "No dist/sumitech/browser directory found"; fi
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'dist/sumitech/browser'
